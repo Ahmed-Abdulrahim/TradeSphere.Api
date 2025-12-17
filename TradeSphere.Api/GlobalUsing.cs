@@ -17,6 +17,13 @@ global using TradeSphere.Infrastructure.Persistence.DbContext;
 global using TradeSphere.Infrastructure.Persistence.SeedDataClass;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.AspNetCore.Mvc;
+global using TradeSphere.Application.DTOs.AuthDto;
+global using TradeSphere.Application.UseCases;
+global using TradeSphere.Application.Interfaces.Repositories;
+global using TradeSphere.Application.Interfaces.Services;
+global using TradeSphere.Domain.Models.IdentityUser;
+global using TradeSphere.Infrastructure.Repositories.AuthRepository;
+global using TradeSphere.Infrastructure.Services;
 
 
 

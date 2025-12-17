@@ -20,8 +20,4 @@
 		<ProjectReference Include="..\TradeSphere.Infrastructure\TradeSphere.Infrastructure.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Controllers\" />
-	</ItemGroup>
-
 </Project>

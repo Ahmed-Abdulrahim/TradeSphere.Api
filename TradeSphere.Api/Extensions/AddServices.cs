@@ -1,6 +1,4 @@
-﻿using TradeSphere.Domain.Models.IdentityUser;
-
-namespace TradeSphere.Api.Extensions
+﻿namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {
@@ -16,6 +14,9 @@ namespace TradeSphere.Api.Extensions
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<TradeSphereDbContext>();
 
+            service.AddScoped<IAuthService, AuthService>();
+            service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<AuthUseCase>();
             return service;
         }
 

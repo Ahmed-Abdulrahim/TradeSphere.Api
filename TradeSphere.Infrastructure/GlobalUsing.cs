@@ -12,6 +12,13 @@ global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Identity;
 global using TradeSphere.Infrastructure.Persistence.DbContext;
 global using System;
+global using Microsoft.IdentityModel.Tokens;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using System.Text;
+global using TradeSphere.Application.Interfaces.Services;
+global using TradeSphere.Application.Interfaces.Repositories;
+
 
 
 
