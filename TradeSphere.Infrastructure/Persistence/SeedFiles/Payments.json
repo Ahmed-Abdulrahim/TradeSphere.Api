@@ -1,0 +1,26 @@
+[
+  {
+    "OrderId": 1,
+    "AppUserId": 2,
+    "Amount": 26200.00,
+    "PaymentMethod": "Credit Card",
+    "Status": "Completed",
+    "PaymentDate": "2024-12-01T10:32:00"
+  },
+  {
+    "OrderId": 2,
+    "AppUserId": 4,
+    "Amount": 2000.00,
+    "PaymentMethod": "Cash on Delivery",
+    "Status": "Pending",
+    "PaymentDate": "2024-12-05T14:16:00"
+  },
+  {
+    "OrderId": 3,
+    "AppUserId": 2,
+    "Amount": 45000.00,
+    "PaymentMethod": "Debit Card",
+    "Status": "Completed",
+    "PaymentDate": "2024-12-10T09:05:00"
+  }
+]

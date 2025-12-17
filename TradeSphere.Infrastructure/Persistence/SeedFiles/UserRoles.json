@@ -1,0 +1,22 @@
+[
+  {
+    "UserEmail": "admin@tradesphere.com",
+    "RoleName": "Admin"
+  },
+  {
+    "UserEmail": "user1@tradesphere.com",
+    "RoleName": "User"
+  },
+  {
+    "UserEmail": "seller1@tradesphere.com",
+    "RoleName": "Seller"
+  },
+  {
+    "UserEmail": "user2@tradesphere.com",
+    "RoleName": "User"
+  },
+  {
+    "UserEmail": "seller2@tradesphere.com",
+    "RoleName": "Seller"
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "Name": "Samsung Galaxy S23",
+    "Description": "Latest Samsung flagship smartphone with amazing camera",
+    "Price": 25000.00,
+    "Quantity": 50,
+    "Image": "samsung-s23.jpg",
+    "CategoryId": 1
+  },
+  {
+    "Name": "iPhone 15 Pro",
+    "Description": "Apple's latest iPhone with A17 Pro chip",
+    "Price": 35000.00,
+    "Quantity": 30,
+    "Image": "iphone-15-pro.jpg",
+    "CategoryId": 1
+  },
+  {
+    "Name": "Dell XPS 15",
+    "Description": "High performance laptop for professionals",
+    "Price": 45000.00,
+    "Quantity": 20,
+    "Image": "dell-xps-15.jpg",
+    "CategoryId": 1
+  },
+  {
+    "Name": "Men's T-Shirt",
+    "Description": "Comfortable cotton t-shirt",
+    "Price": 250.00,
+    "Quantity": 100,
+    "Image": "tshirt.jpg",
+    "CategoryId": 2
+  },
+  {
+    "Name": "Women's Dress",
+    "Description": "Elegant summer dress",
+    "Price": 800.00,
+    "Quantity": 75,
+    "Image": "dress.jpg",
+    "CategoryId": 2
+  },
+  {
+    "Name": "Jeans",
+    "Description": "Classic blue jeans",
+    "Price": 600.00,
+    "Quantity": 60,
+    "Image": "jeans.jpg",
+    "CategoryId": 2
+  },
+  {
+    "Name": "Harry Potter Collection",
+    "Description": "Complete Harry Potter book series",
+    "Price": 1500.00,
+    "Quantity": 40,
+    "Image": "harry-potter.jpg",
+    "CategoryId": 3
+  },
+  {
+    "Name": "Programming in C#",
+    "Description": "Comprehensive C# programming guide",
+    "Price": 450.00,
+    "Quantity": 35,
+    "Image": "csharp-book.jpg",
+    "CategoryId": 3
+  },
+  {
+    "Name": "Coffee Maker",
+    "Description": "Automatic coffee maker with timer",
+    "Price": 1200.00,
+    "Quantity": 45,
+    "Image": "coffee-maker.jpg",
+    "CategoryId": 4
+  },
+  {
+    "Name": "Kitchen Knife Set",
+    "Description": "Professional chef knife set",
+    "Price": 850.00,
+    "Quantity": 55,
+    "Image": "knife-set.jpg",
+    "CategoryId": 4
+  },
+  {
+    "Name": "Football",
+    "Description": "Professional size 5 football",
+    "Price": 350.00,
+    "Quantity": 80,
+    "Image": "football.jpg",
+    "CategoryId": 5
+  },
+  {
+    "Name": "Running Shoes",
+    "Description": "Comfortable sports running shoes",
+    "Price": 1200.00,
+    "Quantity": 65,
+    "Image": "running-shoes.jpg",
+    "CategoryId": 5
+  },
+  {
+    "Name": "LEGO City Set",
+    "Description": "Large LEGO construction set",
+    "Price": 2000.00,
+    "Quantity": 30,
+    "Image": "lego-city.jpg",
+    "CategoryId": 6
+  },
+  {
+    "Name": "Barbie Doll",
+    "Description": "Classic Barbie doll with accessories",
+    "Price": 400.00,
+    "Quantity": 70,
+    "Image": "barbie.jpg",
+    "CategoryId": 6
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "OrderDate": "2024-12-01T10:30:00",
+    "TotalAmount": 26200.00,
+    "Status": "Delivered",
+    "AppUserId": 2
+  },
+  {
+    "OrderDate": "2024-12-05T14:15:00",
+    "TotalAmount": 2000.00,
+    "Status": "Pending",
+    "AppUserId": 4
+  },
+  {
+    "OrderDate": "2024-12-10T09:00:00",
+    "TotalAmount": 45000.00,
+    "Status": "Shipped",
+    "AppUserId": 2
+  }
+]

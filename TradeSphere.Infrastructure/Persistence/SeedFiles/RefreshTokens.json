@@ -1,0 +1,37 @@
+[
+  {
+    "Token": "abc123def456ghi789jkl012mno345pqr678stu901vwx234yz",
+    "ExpireOn": "2025-01-15T10:30:00",
+    "CreatedOn": "2024-12-15T10:30:00",
+    "RevokedOn": null,
+    "AppUserId": 1
+  },
+  {
+    "Token": "xyz987wvu654tsr321qpo098nml765kji432hgf109edc876ba",
+    "ExpireOn": "2025-01-16T14:20:00",
+    "CreatedOn": "2024-12-16T14:20:00",
+    "RevokedOn": null,
+    "AppUserId": 2
+  },
+  {
+    "Token": "qwe456rty789uio012pas345dfg678hjk901lzx234cvb567nm",
+    "ExpireOn": "2025-01-17T09:15:00",
+    "CreatedOn": "2024-12-17T09:15:00",
+    "RevokedOn": null,
+    "AppUserId": 3
+  },
+  {
+    "Token": "mnb098vcx765zas432qwe109poi876yui543tre210lkj987hgf",
+    "ExpireOn": "2024-12-10T11:00:00",
+    "CreatedOn": "2024-11-10T11:00:00",
+    "RevokedOn": "2024-12-05T15:30:00",
+    "AppUserId": 4
+  },
+  {
+    "Token": "plm147ijn258uhb369ygt470rfv581cde692xsw703zaq814bgt",
+    "ExpireOn": "2025-01-14T16:45:00",
+    "CreatedOn": "2024-12-14T16:45:00",
+    "RevokedOn": null,
+    "AppUserId": 5
+  }
+]

@@ -1,5 +1,4 @@
-
-namespace TradeSphere.Api
+﻿namespace TradeSphere.Api
 {
     public class Program
     {
@@ -14,11 +13,13 @@ namespace TradeSphere.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.ValidationResponse();
+            builder.Services.ApplyServices(builder.Configuration);
+
+            object value = builder.Services.ValidationResponse();
 
 
             var app = builder.Build();
-
+            await app.ApplyMigrationWithSeed();
             app.UseMiddleware<GlobalErrorMiddleware>();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

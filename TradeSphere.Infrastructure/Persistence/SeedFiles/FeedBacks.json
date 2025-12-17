@@ -1,0 +1,37 @@
+[
+  {
+    "AppUserId": 2,
+    "Rating": 5,
+    "Comment": "Excellent phone! Very fast and great camera quality",
+    "CreatedAt": "2024-12-02T16:30:00",
+    "ProductId": 1
+  },
+  {
+    "AppUserId": 4,
+    "Rating": 4,
+    "Comment": "Good quality jeans, fits perfectly",
+    "CreatedAt": "2024-12-03T10:15:00",
+    "ProductId": 6
+  },
+  {
+    "AppUserId": 2,
+    "Rating": 5,
+    "Comment": "Amazing laptop for work and gaming",
+    "CreatedAt": "2024-12-11T14:20:00",
+    "ProductId": 3
+  },
+  {
+    "AppUserId": 4,
+    "Rating": 5,
+    "Comment": "My kids love this LEGO set!",
+    "CreatedAt": "2024-12-06T09:45:00",
+    "ProductId": 13
+  },
+  {
+    "AppUserId": 2,
+    "Rating": 4,
+    "Comment": "Great book collection for Harry Potter fans",
+    "CreatedAt": "2024-11-28T13:00:00",
+    "ProductId": 7
+  }
+]

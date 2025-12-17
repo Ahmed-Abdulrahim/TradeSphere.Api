@@ -1,6 +1,4 @@
-﻿
-
-namespace TradeSphere.Api.Extensions
+﻿namespace TradeSphere.Api.Extensions
 {
     public static class ErrorValidationExtension
     {

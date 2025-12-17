@@ -1,0 +1,47 @@
+[
+  {
+    "UserName": "admin",
+    "Email": "admin@tradesphere.com",
+    "EmailConfirmed": true,
+    "PhoneNumber": "01012345678",
+    "PhoneNumberConfirmed": true,
+    "FirstName": "Ahmed",
+    "LastName": "Admin"
+  },
+  {
+    "UserName": "user1",
+    "Email": "user1@tradesphere.com",
+    "EmailConfirmed": true,
+    "PhoneNumber": "01023456789",
+    "PhoneNumberConfirmed": true,
+    "FirstName": "Mohamed",
+    "LastName": "Ali"
+  },
+  {
+    "UserName": "seller1",
+    "Email": "seller1@tradesphere.com",
+    "EmailConfirmed": true,
+    "PhoneNumber": "01034567890",
+    "PhoneNumberConfirmed": true,
+    "FirstName": "Sara",
+    "LastName": "Hassan"
+  },
+  {
+    "UserName": "user2",
+    "Email": "user2@tradesphere.com",
+    "EmailConfirmed": true,
+    "PhoneNumber": "01045678901",
+    "PhoneNumberConfirmed": true,
+    "FirstName": "Fatma",
+    "LastName": "Ibrahim"
+  },
+  {
+    "UserName": "seller2",
+    "Email": "seller2@tradesphere.com",
+    "EmailConfirmed": true,
+    "PhoneNumber": "01056789012",
+    "PhoneNumberConfirmed": true,
+    "FirstName": "Omar",
+    "LastName": "Khalil"
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+
+    "Name": "Admin",
+    "NormalizedName": "ADMIN",
+    "Description": "Administrator with full system access",
+    "ConcurrencyStamp": "1"
+  },
+  {
+
+    "Name": "User",
+    "NormalizedName": "USER",
+    "Description": "Regular user with basic access",
+    "ConcurrencyStamp": "2"
+  },
+  {
+
+    "Name": "Seller",
+    "NormalizedName": "SELLER",
+    "Description": "Seller who can manage products",
+    "ConcurrencyStamp": "3"
+  }
+]
