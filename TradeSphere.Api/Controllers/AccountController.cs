@@ -60,5 +60,37 @@
         }
 
 
+        [HttpPost("ChangeEmail")]
+        [Authorize]
+        public async Task<IActionResult> ChangeEmail(string newEmail)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var result = await authUseCase.RequestChangeEmail(userEmail, newEmail);
+            if (string.IsNullOrEmpty(result)) return BadRequest(new ApiResponse(400, "InvalidOperation"));
+            return Ok(new ApiResponse(200, result));
+        }
+
+        [HttpGet("ConfirmChangeEmail")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail([FromQuery] string userId, [FromQuery] string newEmail, [FromQuery] string token)
+        {
+            var result = await authUseCase.ConfrimEmailForAfterChanging(
+                userId,
+                new ConfirmChangeEmailRequest
+                {
+                    NewEmail = newEmail,
+                    Token = token
+                });
+
+            if (string.IsNullOrEmpty(result))
+                return BadRequest(new ApiResponse(400, "Invalid or expired token"));
+
+            return Ok(new ApiResponse(200, result));
+        }
+
+
+
+
+
     }
 }

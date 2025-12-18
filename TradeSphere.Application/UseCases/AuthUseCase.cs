@@ -25,7 +25,7 @@
             {
                 Email = registerUser.Email,
                 UserName = registerUser.UserName,
-                Token = await authServices.GenerateJwtToken(addUser)
+                Message = "Verify Your Email"
             };
             return result;
         }
@@ -76,6 +76,18 @@
             if (!flag) return null;
             return "Password Changed Success";
 
+        }
+
+        public async Task<string> RequestChangeEmail(string currentEmail, string newEmail)
+        {
+            await userRepository.RequestChangeEmailAsync(currentEmail, newEmail);
+            return "Email Has Sent Success";
+        }
+
+        public async Task<string> ConfrimEmailForAfterChanging(string userId, ConfirmChangeEmailRequest emailChange)
+        {
+            await userRepository.ChangeEmail(userId, emailChange);
+            return "Email Has Changed Successfully";
         }
 
 

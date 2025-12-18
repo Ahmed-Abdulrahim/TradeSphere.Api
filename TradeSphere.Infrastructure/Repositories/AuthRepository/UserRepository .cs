@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Infrastructure.Repositories.AuthRepository
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace TradeSphere.Infrastructure.Repositories.AuthRepository
 {
     public class UserRepository(UserManager<AppUser> userManager, IConfiguration configuration, IEmailService emailService) : IUserRepository
     {
@@ -26,7 +28,7 @@
             var success = await userManager.CreateAsync(user, password);
             if (!success.Succeeded)
             {
-                var error = String.Join(",", success.Errors.Select(e => e.Description));
+                var error = String.Join(separator: ",", success.Errors.Select(e => e.Description));
                 throw new Exception($"{error}");
             }
             var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -133,6 +135,51 @@
             }
             return true;
 
+        }
+
+        public async Task RequestChangeEmailAsync(string currentEmail, string newEmail)
+        {
+            var user = await userManager.FindByEmailAsync(currentEmail);
+            if (user is null) throw new Exception("UserNotFound");
+            var token = await userManager.GenerateChangeEmailTokenAsync(user, newEmail);
+            var tokenBytes = Encoding.UTF8.GetBytes(token);
+            var base64Token = Convert.ToBase64String(tokenBytes);
+            var resetUrl =
+         $"{configuration["EmailSettings:AppUrl"]}/api/Account/ConfirmChangeEmail" +
+         $"?userId={user.Id}&newEmail={newEmail}&token={base64Token}";
+            await emailService.SendEmailAsync(newEmail, "Confirm Change Email", EmailBody(resetUrl));
+        }
+        public async Task<string> ChangeEmail(string userId, ConfirmChangeEmailRequest emailChange)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user is null) throw new Exception("User Not Found");
+
+            var existingUser = await userManager.FindByEmailAsync(emailChange.NewEmail);
+            if (existingUser != null && existingUser.Id != user.Id)
+            {
+                return "Email already in use";
+            }
+            var tokenBytes = Convert.FromBase64String(emailChange.Token);
+            var decodedToken = Encoding.UTF8.GetString(tokenBytes);
+            var changeEmail = await userManager.ChangeEmailAsync(user, emailChange.NewEmail, decodedToken);
+            if (!changeEmail.Succeeded)
+            {
+                return "Operation Failed";
+            }
+            var setUsernameResult = await userManager.SetUserNameAsync(user, emailChange.NewEmail);
+            if (!setUsernameResult.Succeeded)
+            {
+                var errors = string.Join(", ", setUsernameResult.Errors.Select(e => e.Description));
+                return $"Failed to update username: {errors}";
+            }
+            user.EmailConfirmed = true;
+            var updateResult = await userManager.UpdateAsync(user);
+            if (!updateResult.Succeeded)
+            {
+                var errors = string.Join(", ", updateResult.Errors.Select(e => e.Description));
+                return $"Failed to confirm email: {errors}";
+            }
+            return "Success";
         }
     }
 }
