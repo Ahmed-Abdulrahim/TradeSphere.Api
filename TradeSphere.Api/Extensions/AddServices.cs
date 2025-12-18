@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Api.Extensions
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {
@@ -12,11 +14,15 @@
             service.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-            }).AddEntityFrameworkStores<TradeSphereDbContext>();
+                options.SignIn.RequireConfirmedEmail = true;
+
+            }).AddEntityFrameworkStores<TradeSphereDbContext>().AddDefaultTokenProviders(); ;
 
             service.AddScoped<IAuthService, AuthService>();
             service.AddScoped<IUserRepository, UserRepository>();
             service.AddScoped<AuthUseCase>();
+            service.AddScoped<IEmailService, EmailService>();
+
             return service;
         }
 

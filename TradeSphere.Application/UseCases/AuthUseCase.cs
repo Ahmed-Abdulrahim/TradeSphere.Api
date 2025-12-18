@@ -35,6 +35,9 @@
             if (findUser is null) throw new Exception("InValid Email Or Password");
             var checkPassword = await userRepository.CheckPasswordAsync(findUser, loginUser.Password);
             if (!checkPassword) throw new Exception("invalid Email or Password");
+            if (!await userRepository.IsEmailConfirmed(findUser))
+                throw new Exception("Email not confirmed");
+
             return new UserResultDto()
             {
                 Email = loginUser.Email,
@@ -42,5 +45,16 @@
                 Token = await authServices.GenerateJwtToken(findUser)
             };
         }
+        public async Task<string> ConfirmEmail(string userId, string token)
+        {
+            var user = await userRepository.FindByUserIdAsync(userId);
+            if (user == null)
+                throw new Exception("User not found");
+
+            var result = await userRepository.ConfirmEmailAync(user, token);
+
+            return "Email confirmed successfully";
+        }
+
     }
 }

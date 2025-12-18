@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Api.Controllers
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace TradeSphere.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -18,5 +20,15 @@
             var result = await authUseCase.RegisterUser(user);
             return Ok(result);
         }
+
+        [HttpGet("confirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            var result = await authUseCase.ConfirmEmail(userId, token);
+            return Ok(result);
+        }
+
+
+
     }
 }

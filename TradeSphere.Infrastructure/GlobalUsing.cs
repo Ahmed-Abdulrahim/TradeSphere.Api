@@ -18,6 +18,10 @@ global using System.Security.Claims;
 global using System.Text;
 global using TradeSphere.Application.Interfaces.Services;
 global using TradeSphere.Application.Interfaces.Repositories;
+global using MailKit.Net.Smtp;
+global using MailKit.Security;
+global using Microsoft.Extensions.Configuration;
+global using MimeKit;
 
 
 
