@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
+﻿
 namespace TradeSphere.Domain.Models
 {
     public class OrderItem : BaseEntity

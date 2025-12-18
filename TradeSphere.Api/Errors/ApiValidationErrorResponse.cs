@@ -1,5 +1,4 @@
-﻿
-namespace TradeSphere.Api.Errors
+﻿namespace TradeSphere.Api.Errors
 {
     public class ApiValidationErrorResponse : ApiResponse
     {

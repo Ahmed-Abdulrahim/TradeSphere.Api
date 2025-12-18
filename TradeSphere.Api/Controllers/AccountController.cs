@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace TradeSphere.Api.Controllers
+﻿namespace TradeSphere.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -25,9 +23,41 @@ namespace TradeSphere.Api.Controllers
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
             var result = await authUseCase.ConfirmEmail(userId, token);
-            return Ok(result);
+            return Ok(new ApiResponse(200, result));
         }
 
+
+        [HttpPost("ChangePassword")]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword)
+        {
+            var user = User.FindFirstValue(ClaimTypes.Email);
+            if (user is null) return Unauthorized(value: "un Authorized");
+            var changePassword = await authUseCase.ChangePassword(user, currentPassword, newPassword);
+            if (string.IsNullOrEmpty(changePassword)) return BadRequest(new ApiResponse(400, "Try Again"));
+            return Ok(new ApiResponse(200, changePassword));
+        }
+
+        [HttpPost("forgertPassword")]
+        [Authorize]
+        public async Task<IActionResult> ForgertPassword(string email)
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email)!;
+            if (userEmail != email) return BadRequest(new ApiResponse(400, "Invalid Email"));
+            await authUseCase.ForgetPassword(email);
+            return NoContent();
+
+        }
+
+        [HttpPost(template: "ResetPassword")]
+        [Authorize]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPassword)
+        {
+            var result = await authUseCase.resetPassword(resetPassword);
+            if (string.IsNullOrEmpty(result)) return BadRequest(new ApiResponse(400, "Try Again"));
+            return Ok(new ApiResponse(200, result));
+
+        }
 
 
     }

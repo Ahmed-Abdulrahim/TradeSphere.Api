@@ -14,6 +14,7 @@
             builder.Services.AddSwaggerGen();
 
             builder.Services.ApplyServices(builder.Configuration);
+            builder.Services.AddAuthorizeSwaggerAsync(builder.Configuration);
 
             object value = builder.Services.ValidationResponse();
 

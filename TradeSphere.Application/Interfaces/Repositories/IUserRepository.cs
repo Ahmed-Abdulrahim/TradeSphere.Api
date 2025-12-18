@@ -9,6 +9,9 @@
         public Task<AppUser> FindByUserIdAsync(string userId);
         public Task<bool> ConfirmEmailAync(AppUser user, string token);
         public Task<bool> IsEmailConfirmed(AppUser user);
+        public Task<bool> ChangePassword(AppUser user, string currentPassword, string newPassword);
+        public Task ForgetPasswordAsync(string email);
+        public Task<bool> ResetPasswordAsync(ResetPasswordDto resetPassword);
 
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
+﻿
 namespace TradeSphere.Infrastructure.Services
 {
     public class AuthService(UserManager<AppUser> userManager, IConfiguration configration) : IAuthService

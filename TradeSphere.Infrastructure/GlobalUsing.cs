@@ -22,6 +22,11 @@ global using MailKit.Net.Smtp;
 global using MailKit.Security;
 global using Microsoft.Extensions.Configuration;
 global using MimeKit;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using System.Net;
+global using System.Text.Encodings.Web;
+global using TradeSphere.Application.DTOs.AuthDto;
 
 
 

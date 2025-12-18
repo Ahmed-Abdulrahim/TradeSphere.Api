@@ -55,6 +55,29 @@
 
             return "Email confirmed successfully";
         }
+        public async Task<string> ChangePassword(string email, string currentPassword, string newPassword)
+        {
+            var user = await userRepository.FindByEmailAsync(email);
+            var flag = await userRepository.ChangePassword(user, currentPassword, newPassword);
+            return "PasswordChangeSucess";
+
+        }
+
+        public async Task<string> ForgetPassword(string email)
+        {
+            await userRepository.ForgetPasswordAsync(email);
+            return "Email Has Sent Success";
+
+        }
+
+        public async Task<string> resetPassword(ResetPasswordDto resetPassword)
+        {
+            var flag = await userRepository.ResetPasswordAsync(resetPassword);
+            if (!flag) return null;
+            return "Password Changed Success";
+
+        }
+
 
     }
 }

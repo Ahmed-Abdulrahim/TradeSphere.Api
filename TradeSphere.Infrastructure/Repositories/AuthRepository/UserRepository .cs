@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-
-namespace TradeSphere.Infrastructure.Repositories.AuthRepository
+﻿namespace TradeSphere.Infrastructure.Repositories.AuthRepository
 {
     public class UserRepository(UserManager<AppUser> userManager, IConfiguration configuration, IEmailService emailService) : IUserRepository
     {
@@ -64,6 +60,17 @@ namespace TradeSphere.Infrastructure.Repositories.AuthRepository
             return true;
         }
 
+        public async Task<bool> ChangePassword(AppUser user, string currentPassword, string newPassword)
+        {
+            if (user is null) throw new Exception("UserNotFound");
+            var changePassword = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+            if (!changePassword.Succeeded)
+            {
+                throw new Exception("Operation Failed");
+            }
+            return true;
+        }
+
         private string EmailBody(string confirmUrl)
         {
 
@@ -97,6 +104,35 @@ namespace TradeSphere.Infrastructure.Repositories.AuthRepository
 """;
 
             return emailBody;
+        }
+
+        public async Task ForgetPasswordAsync(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user is null) throw new Exception("User Not Found");
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            var encoderToken = UrlEncoder.Default.Encode(token);
+            var resetUrl =
+         $"{configuration["EmailSettings:AppUrl"]}/api/Account/ResetPassword" +
+         $"?userId={user.Id}&token={encoderToken}";
+            await emailService.SendEmailAsync(user.Email, "ResetPassword", EmailBody(resetUrl));
+
+        }
+
+        public async Task<bool> ResetPasswordAsync(ResetPasswordDto resetPassword)
+        {
+            if (resetPassword.NewPassword != resetPassword.ConfirmPassword) throw new Exception("Password Dont Match");
+            var user = await userManager.FindByEmailAsync(resetPassword.Email);
+            if (user is null) throw new Exception("User Not Found");
+            var decodedToken = WebUtility.UrlDecode(resetPassword.Token);
+            var result = await userManager.ResetPasswordAsync(user, decodedToken, resetPassword.NewPassword);
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new Exception(errors);
+            }
+            return true;
+
         }
     }
 }
