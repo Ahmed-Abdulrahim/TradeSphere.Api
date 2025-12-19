@@ -11,6 +11,8 @@ global using System.Collections.Generic;
 global using System.Linq.Expressions;
 global using TradeSphere.Domain.Models;
 global using TradeSphere.Application.Interfaces.Specefication;
+global using Microsoft.EntityFrameworkCore;
+
 
 
 

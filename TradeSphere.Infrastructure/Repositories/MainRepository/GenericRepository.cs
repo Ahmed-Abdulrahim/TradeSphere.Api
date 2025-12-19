@@ -1,6 +1,4 @@
-﻿using TradeSphere.Infrastructure.Specefication;
-
-namespace TradeSphere.Infrastructure.Repositories.MainRepository
+﻿namespace TradeSphere.Infrastructure.Repositories.MainRepository
 {
     public class GenericRepository<T>(TradeSphereDbContext context) : IRepository<T> where T : BaseEntity
     {

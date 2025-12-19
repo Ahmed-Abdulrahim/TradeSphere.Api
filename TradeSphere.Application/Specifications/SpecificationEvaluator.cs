@@ -1,4 +1,4 @@
-﻿namespace TradeSphere.Infrastructure.Specefication
+﻿namespace TradeSphere.Application.Specefication
 {
     public class SpecificationEvaluator<T> where T : BaseEntity
     {

@@ -33,6 +33,8 @@ global using Microsoft.EntityFrameworkCore.Storage;
 global using TradeSphere.Application.Interfaces.UnitOfWork;
 global using TradeSphere.Infrastructure.Repositories.AuthRepository;
 global using TradeSphere.Infrastructure.Repositories.MainRepository;
+global using TradeSphere.Application.Specefication;
+
 
 
 

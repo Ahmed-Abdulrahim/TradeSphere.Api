@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace TradeSphere.Infrastructure.Repositories.AuthRepository
+﻿namespace TradeSphere.Infrastructure.Repositories.AuthRepository
 {
     public class UserRepository(UserManager<AppUser> userManager, IConfiguration? configuration, IEmailService? emailService) : IUserRepository
     {

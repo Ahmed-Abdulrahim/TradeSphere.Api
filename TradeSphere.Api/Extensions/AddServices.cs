@@ -1,7 +1,4 @@
-﻿using TradeSphere.Application.Interfaces.UnitOfWork;
-using TradeSphere.Infrastructure.UnitOfWork;
-
-namespace TradeSphere.Api.Extensions
+﻿namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {
