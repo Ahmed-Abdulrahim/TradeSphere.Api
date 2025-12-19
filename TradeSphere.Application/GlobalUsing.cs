@@ -7,6 +7,9 @@ global using System.Linq;
 global using TradeSphere.Application.DTOs.AuthDto;
 global using TradeSphere.Application.Interfaces.Services;
 global using TradeSphere.Application.Interfaces.Repositories;
+global using System.Collections.Generic;
+global using System.Linq.Expressions;
+global using TradeSphere.Domain.Models;
 
 
 

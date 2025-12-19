@@ -181,5 +181,11 @@ namespace TradeSphere.Infrastructure.Repositories.AuthRepository
             }
             return "Success";
         }
+
+        ////LoGout
+        //public async Task<bool> LogOut(string email) 
+        //{
+        //    var user = await userManager.out
+        //}
     }
 }

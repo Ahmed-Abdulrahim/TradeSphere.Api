@@ -27,6 +27,10 @@ global using Microsoft.EntityFrameworkCore.Migrations;
 global using System.Net;
 global using System.Text.Encodings.Web;
 global using TradeSphere.Application.DTOs.AuthDto;
+global using TradeSphere.Application.Interfaces.Specefication;
+global using System.Linq.Expressions;
+
+
 
 
 
