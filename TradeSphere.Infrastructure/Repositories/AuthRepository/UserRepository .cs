@@ -2,7 +2,7 @@
 
 namespace TradeSphere.Infrastructure.Repositories.AuthRepository
 {
-    public class UserRepository(UserManager<AppUser> userManager, IConfiguration configuration, IEmailService emailService) : IUserRepository
+    public class UserRepository(UserManager<AppUser> userManager, IConfiguration? configuration, IEmailService? emailService) : IUserRepository
     {
         public async Task<AppUser> FindByEmailAsync(string email)
         {

@@ -1,4 +1,7 @@
-﻿namespace TradeSphere.Api.Extensions
+﻿using TradeSphere.Application.Interfaces.UnitOfWork;
+using TradeSphere.Infrastructure.UnitOfWork;
+
+namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {
@@ -20,6 +23,8 @@
             service.AddScoped<IUserRepository, UserRepository>();
             service.AddScoped<AuthUseCase>();
             service.AddScoped<IEmailService, EmailService>();
+            service.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
             return service;
         }

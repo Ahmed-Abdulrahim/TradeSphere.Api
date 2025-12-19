@@ -29,6 +29,10 @@ global using System.Text.Encodings.Web;
 global using TradeSphere.Application.DTOs.AuthDto;
 global using TradeSphere.Application.Interfaces.Specefication;
 global using System.Linq.Expressions;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using TradeSphere.Application.Interfaces.UnitOfWork;
+global using TradeSphere.Infrastructure.Repositories.AuthRepository;
+global using TradeSphere.Infrastructure.Repositories.MainRepository;
 
 
 
