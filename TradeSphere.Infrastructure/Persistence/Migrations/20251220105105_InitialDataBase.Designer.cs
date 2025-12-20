@@ -12,8 +12,8 @@ using TradeSphere.Infrastructure.Persistence.DbContext;
 namespace TradeSphere.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(TradeSphereDbContext))]
-    [Migration("20251217114808_CreateDataBaseWithTables")]
-    partial class CreateDataBaseWithTables
+    [Migration("20251220105105_InitialDataBase")]
+    partial class InitialDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -330,6 +330,9 @@ namespace TradeSphere.Infrastructure.Persistence.Migrations
 
                     b.Property<DateTime>("ExpireOn")
                         .HasColumnType("datetime");
+
+                    b.Property<bool>("RememberMe")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("RevokedOn")
                         .HasColumnType("datetime2");

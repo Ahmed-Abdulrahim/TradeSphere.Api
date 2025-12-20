@@ -30,12 +30,13 @@
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public RefreshToken GenerateRefreshToken(int userId)
+        public RefreshToken GenerateRefreshToken(int userId, bool rememberMe)
         {
+            var expireOn = rememberMe ? 30 : 7;
             return new RefreshToken
             {
                 Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-                ExpireOn = DateTime.UtcNow.AddDays(7),
+                ExpireOn = DateTime.UtcNow.AddDays(expireOn),
                 CreatedOn = DateTime.UtcNow,
                 AppUserId = userId
             };
@@ -58,7 +59,7 @@
 
             var user = refreshToken.AppUser;
             var newAccessToken = await GenerateJwtToken(user);
-            var newRefreshToken = GenerateRefreshToken(user.Id);
+            var newRefreshToken = GenerateRefreshToken(user.Id, refreshToken.RememberMe);
             await refreshTokenRepository.AddAsync(newRefreshToken);
 
             return (newAccessToken, newRefreshToken);

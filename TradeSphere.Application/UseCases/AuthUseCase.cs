@@ -43,7 +43,7 @@ namespace TradeSphere.Application.UseCases
             if (!await userRepository.IsEmailConfirmed(findUser))
                 throw new Exception("Email not confirmed");
             var accessToken = await authServices.GenerateJwtToken(findUser);
-            var refreshToken = authServices.GenerateRefreshToken(findUser.Id);
+            var refreshToken = authServices.GenerateRefreshToken(findUser.Id, loginUser.RememberMe);
             await refreshTokenRepository.AddAsync(refreshToken);
 
             return new UserResultDto()

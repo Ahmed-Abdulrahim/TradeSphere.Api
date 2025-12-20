@@ -1,10 +1,12 @@
-﻿
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
 #nullable disable
 
 namespace TradeSphere.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDataBaseWithTables : Migration
+    public partial class InitialDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -226,7 +228,8 @@ namespace TradeSphere.Infrastructure.Persistence.Migrations
                     ExpireOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     RevokedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AppUserId = table.Column<int>(type: "int", nullable: false)
+                    AppUserId = table.Column<int>(type: "int", nullable: false),
+                    RememberMe = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
