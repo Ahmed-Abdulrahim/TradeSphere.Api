@@ -1,4 +1,4 @@
-﻿namespace TradeSphere.Application.DTOs
+﻿namespace TradeSphere.Application.DTOs.Category
 {
     public class CategoryListDto
     {

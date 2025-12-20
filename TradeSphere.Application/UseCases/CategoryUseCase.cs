@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using TradeSphere.Application.DTOs;
+using TradeSphere.Application.DTOs.Category;
 using TradeSphere.Application.Interfaces.UnitOfWork;
 
 namespace TradeSphere.Application.UseCases
@@ -28,6 +28,17 @@ namespace TradeSphere.Application.UseCases
         {
             var deleteCategory = await categoryRepository.DeleteCategory(id);
             return deleteCategory;
+        }
+
+        public async Task<CategoryListDto> AddCategory(CategoryAddDto categoryAddDto)
+        {
+            var addCategory = await categoryRepository.AddCategory(categoryAddDto);
+            return addCategory;
+        }
+        public async Task<CategoryListDto> UpdateCategory(int id, CategoryAddDto categoryAddDto)
+        {
+            var updatedCategory = await categoryRepository.UpdateCategory(id, categoryAddDto);
+            return updatedCategory;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using TradeSphere.Application.DTOs;
+﻿using TradeSphere.Application.DTOs.Category;
 
 namespace TradeSphere.Api.Controllers
 {
@@ -33,5 +33,23 @@ namespace TradeSphere.Api.Controllers
             var delete = await categoryUseCase.DeleteCategory(id);
             return Ok(new ApiResponse(204, "Deleted Successfully"));
         }
+
+
+        //Add && Update
+        [HttpPost]
+        public async Task<ActionResult<CategoryListDto>> AddCategory(CategoryAddDto categoryAddDto)
+        {
+            var addCategory = await categoryUseCase.AddCategory(categoryAddDto);
+            return Ok(addCategory);
+        }
+
+        //Update
+        [HttpPut("{id}")]
+        public async Task<ActionResult<CategoryListDto>> UpdateCategory(int id, CategoryAddDto categoryAddDto)
+        {
+            var updateCategory = await categoryUseCase.UpdateCategory(id, categoryAddDto);
+            return Ok(updateCategory);
+        }
+
     }
 }

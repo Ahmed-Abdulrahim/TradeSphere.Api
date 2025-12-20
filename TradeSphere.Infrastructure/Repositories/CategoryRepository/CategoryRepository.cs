@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TradeSphere.Application.DTOs;
+using TradeSphere.Application.DTOs.Category;
 
 namespace TradeSphere.Infrastructure.Repositories.CategoryRepository
 {
@@ -43,5 +43,25 @@ namespace TradeSphere.Infrastructure.Repositories.CategoryRepository
             return rowAffected > 0 ? true : false;
         }
 
+        public async Task<CategoryListDto> AddCategory(CategoryAddDto categoryAddDto)
+        {
+            var category = mapper.Map<Category>(categoryAddDto);
+            await unit.Repository<Category>().AddAsync(category);
+            var rowAffected = await unit.CommitAsync();
+            var categoryList = mapper.Map<CategoryListDto>(category);
+            return categoryList;
+        }
+
+        public async Task<CategoryListDto> UpdateCategory(int id, CategoryAddDto categoryAddDto)
+        {
+            var spec = new CategorySpecification(id);
+            var category = await unit.Repository<Category>().GetByIdSpec(spec);
+            category.Name = categoryAddDto.Name;
+            unit.Repository<Category>().Update(category);
+            var rowAffected = await unit.CommitAsync();
+            var categoryList = mapper.Map<CategoryListDto>(category);
+            return categoryList;
+
+        }
     }
 }
