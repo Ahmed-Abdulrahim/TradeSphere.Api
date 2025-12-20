@@ -1,4 +1,7 @@
-﻿namespace TradeSphere.Api.Extensions
+﻿using TradeSphere.Application.Mapping.CategoryProfile;
+using TradeSphere.Infrastructure.Repositories.CategoryRepository;
+
+namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {
@@ -19,9 +22,12 @@
             service.AddScoped<IAuthService, AuthService>();
             service.AddScoped<IUserRepository, UserRepository>();
             service.AddScoped<AuthUseCase>();
+            service.AddScoped<CategoryUseCase>();
             service.AddScoped<IEmailService, EmailService>();
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            service.AddScoped<ICategoryRepository, CategoryRepository>();
+            service.AddAutoMapper(cfg => { }, typeof(CategoryProfile).Assembly);
 
 
             return service;

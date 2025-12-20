@@ -1,6 +1,5 @@
 ﻿namespace TradeSphere.Domain.Models
 {
-    //Configuration
     public class Product : BaseEntity
     {
         public string Name { get; set; }

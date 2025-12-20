@@ -1,4 +1,4 @@
-﻿namespace TradeSphere.Application.Specefication
+﻿namespace TradeSphere.Infrastructure.Specefication
 {
     public class BaseSpecefication<T> : ISpecefication<T> where T : BaseEntity
     {
