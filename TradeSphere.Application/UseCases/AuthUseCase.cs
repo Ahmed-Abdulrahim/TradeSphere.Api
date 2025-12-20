@@ -1,6 +1,10 @@
-﻿namespace TradeSphere.Application.UseCases
+﻿using TradeSphere.Application.Interfaces.Repositories;
+using TradeSphere.Application.Interfaces.Services;
+using TradeSphere.Domain.Models.IdentityUser;
+
+namespace TradeSphere.Application.UseCases
 {
-    public class AuthUseCase(IAuthService authServices, IUserRepository userRepository)
+    public class AuthUseCase(IAuthService authServices, IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository)
     {
         public async Task<UserResultDto> RegisterUser(UserRegisterDto registerUser)
         {
@@ -37,12 +41,17 @@
             if (!checkPassword) throw new Exception("invalid Email or Password");
             if (!await userRepository.IsEmailConfirmed(findUser))
                 throw new Exception("Email not confirmed");
+            var accessToken = await authServices.GenerateJwtToken(findUser);
+            var refreshToken = authServices.GenerateRefreshToken(findUser.Id);
+            await refreshTokenRepository.AddAsync(refreshToken);
 
             return new UserResultDto()
             {
                 Email = loginUser.Email,
                 UserName = findUser.UserName,
-                Token = await authServices.GenerateJwtToken(findUser)
+                Token = await authServices.GenerateJwtToken(findUser),
+                RefreshToken = refreshToken.Token,
+                RefreshTokenExpiration = refreshToken.ExpireOn
             };
         }
         public async Task<string> ConfirmEmail(string userId, string token)
@@ -90,6 +99,12 @@
             return "Email Has Changed Successfully";
         }
 
+        public async Task<(string, RefreshToken)> RefreshToken(RefreshTokenRequest request)
+        {
+            var (accessToken, refreshToken) = await authServices.RefreshTokenAsync(request.RefreshToken);
+
+            return (accessToken, refreshToken);
+        }
 
     }
 }

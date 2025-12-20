@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Api.Controllers
+﻿using static TradeSphere.Application.UseCases.AuthUseCase;
+
+namespace TradeSphere.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -87,6 +89,20 @@
 
             return Ok(new ApiResponse(200, result));
         }
+
+        [HttpPost("refreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+        {
+            var (accessToken, refreshToken) = await authUseCase.RefreshToken(request);
+
+            return Ok(new UserResultDto
+            {
+                Token = accessToken,
+                RefreshToken = refreshToken.Token,
+                RefreshTokenExpiration = refreshToken.ExpireOn
+            });
+        }
+
 
 
 

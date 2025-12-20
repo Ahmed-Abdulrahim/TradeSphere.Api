@@ -16,7 +16,7 @@
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-
+                    ClockSkew = TimeSpan.Zero,
                     ValidIssuer = configuration["JwtOptions:issuer"],
                     ValidAudience = configuration["JwtOptions:audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:secretKey"]!))

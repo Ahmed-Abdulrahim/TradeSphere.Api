@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using TradeSphere.Application.Interfaces.Repositories;
 
 namespace TradeSphere.Application.Interfaces.UnitOfWork
 {
@@ -6,7 +7,9 @@ namespace TradeSphere.Application.Interfaces.UnitOfWork
     {
         IRepository<T> Repository<T>() where T : BaseEntity;
         IUserRepository Users { get; }
+        IRefreshTokenRepository RefreshTokens { get; }
         Task<int> CommitAsync();
         Task<IDbContextTransaction> BeginTransactionAsync();
     }
 }
+

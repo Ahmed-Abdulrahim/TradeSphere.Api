@@ -21,6 +21,7 @@
             service.AddScoped<AuthUseCase>();
             service.AddScoped<IEmailService, EmailService>();
             service.AddScoped<IUnitOfWork, UnitOfWork>();
+            service.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
 
             return service;
