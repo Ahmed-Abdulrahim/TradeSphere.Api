@@ -98,10 +98,33 @@ namespace TradeSphere.Api.Controllers
             return Ok(new UserResultDto
             {
                 Token = accessToken,
-                RefreshToken = refreshToken.Token,
                 RefreshTokenExpiration = refreshToken.ExpireOn
             });
         }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+                return Unauthorized();
+
+            var result = await authUseCase.LogoutAsync(userId);
+
+            return Ok(new ApiResponse(200, result));
+        }
+
+        [Authorize]
+        [HttpGet("test")]
+        public async Task<IActionResult> test()
+        {
+
+
+            return Ok(new ApiResponse(200, "dsad"));
+        }
+
 
 
 

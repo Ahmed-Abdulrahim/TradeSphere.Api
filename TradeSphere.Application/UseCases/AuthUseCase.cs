@@ -1,4 +1,5 @@
-﻿using TradeSphere.Application.Interfaces.Repositories;
+﻿using Microsoft.AspNetCore.Identity;
+using TradeSphere.Application.Interfaces.Repositories;
 using TradeSphere.Application.Interfaces.Services;
 using TradeSphere.Domain.Models.IdentityUser;
 
@@ -104,6 +105,12 @@ namespace TradeSphere.Application.UseCases
             var (accessToken, refreshToken) = await authServices.RefreshTokenAsync(request.RefreshToken);
 
             return (accessToken, refreshToken);
+        }
+
+        public async Task<string> LogoutAsync(string userId)
+        {
+            await userRepository.LogoutAsync(userId);
+            return "Logout Sucess";
         }
 
     }

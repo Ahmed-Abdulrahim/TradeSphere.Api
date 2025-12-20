@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Infrastructure.Repositories.AuthRepository
+﻿using TradeSphere.Application.Interfaces.Repositories;
+
+namespace TradeSphere.Infrastructure.Repositories.AuthRepository
 {
     public class UserRepository(UserManager<AppUser> userManager, IConfiguration? configuration, IEmailService? emailService) : IUserRepository
     {
@@ -180,10 +182,23 @@
             return "Success";
         }
 
-        ////LoGout
-        //public async Task<bool> LogOut(string email) 
-        //{
-        //    var user = await userManager.out
-        //}
+        public async Task LogoutAsync(string userId)
+        {
+            var user = await userManager.Users.Include(u => u.RefreshTokens).FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+            if (user == null)
+                return;
+
+            foreach (var token in user.RefreshTokens)
+            {
+                token.RevokedOn = DateTime.UtcNow;
+            }
+
+            var result = await userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+                throw new ApplicationException("Failed to logout user");
+        }
+
+
     }
 }

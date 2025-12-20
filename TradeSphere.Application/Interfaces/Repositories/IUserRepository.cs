@@ -14,6 +14,7 @@
         public Task<bool> ResetPasswordAsync(ResetPasswordDto resetPassword);
         public Task RequestChangeEmailAsync(string currentEmail, string newEmail);
         public Task<string> ChangeEmail(string userId, ConfirmChangeEmailRequest emailChange);
+        public Task LogoutAsync(string userId);
 
     }
 }

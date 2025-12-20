@@ -21,6 +21,7 @@
                     ValidAudience = configuration["JwtOptions:audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:secretKey"]!))
                 };
+
             });
 
 
