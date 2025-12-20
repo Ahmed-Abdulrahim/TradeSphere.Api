@@ -1,6 +1,4 @@
-﻿using TradeSphere.Application.DTOs.Category;
-
-namespace TradeSphere.Application.Interfaces.Repositories
+﻿namespace TradeSphere.Application.Interfaces.Repositories
 {
     public interface ICategoryRepository
     {

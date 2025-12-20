@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using TradeSphere.Application.Interfaces.Repositories;
-using TradeSphere.Application.Interfaces.Services;
-using TradeSphere.Domain.Models.IdentityUser;
-
-namespace TradeSphere.Application.UseCases
+﻿namespace TradeSphere.Application.UseCases
 {
     public class AuthUseCase(IAuthService authServices, IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository)
     {

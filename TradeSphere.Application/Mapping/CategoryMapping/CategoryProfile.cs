@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-
-using TradeSphere.Application.DTOs;
-using TradeSphere.Application.DTOs.Category;
-
-namespace TradeSphere.Application.Mapping.CategoryProfile
+﻿namespace TradeSphere.Application.Mapping.CategoryProfile
 {
     public class CategoryProfile : Profile
     {

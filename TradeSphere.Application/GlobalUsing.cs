@@ -12,6 +12,13 @@ global using System.Linq.Expressions;
 global using TradeSphere.Domain.Models;
 global using TradeSphere.Application.Interfaces.Specefication;
 global using Microsoft.EntityFrameworkCore;
+global using TradeSphere.Application.DTOs.Category;
+global using AutoMapper;
+global using TradeSphere.Application.DTOs;
+global using Microsoft.Extensions.Logging;
+
+
+
 
 
 

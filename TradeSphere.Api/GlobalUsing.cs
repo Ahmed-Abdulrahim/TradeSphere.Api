@@ -33,6 +33,8 @@ global using System.Text;
 global using Microsoft.AspNetCore.Identity;
 global using TradeSphere.Application.Interfaces.UnitOfWork;
 global using TradeSphere.Infrastructure.UnitOfWork;
+global using TradeSphere.Application.DTOs.Category;
+
 
 
 

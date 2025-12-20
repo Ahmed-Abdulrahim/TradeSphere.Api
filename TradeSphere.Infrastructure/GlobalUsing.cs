@@ -35,6 +35,11 @@ global using TradeSphere.Infrastructure.Repositories.AuthRepository;
 global using TradeSphere.Infrastructure.Repositories.MainRepository;
 global using System.Security.Cryptography;
 global using TradeSphere.Infrastructure.Specefication;
+global using TradeSphere.Application.DTOs.Category;
+global using AutoMapper;
+global using Microsoft.Extensions.Logging;
+
+
 
 
 

@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using TradeSphere.Application.DTOs.Category;
-using TradeSphere.Application.Interfaces.UnitOfWork;
-
-namespace TradeSphere.Application.UseCases
+﻿namespace TradeSphere.Application.UseCases
 {
-    public class CategoryUseCase(ICategoryRepository categoryRepository)
+    public class CategoryUseCase(ICategoryRepository categoryRepository, ILogger<CategoryUseCase> logger)
     {
         public async Task<List<CategoryListDto>> GetAllCategory()
         {
@@ -20,24 +16,50 @@ namespace TradeSphere.Application.UseCases
 
         public async Task<CategoryListDto> GetByName(string name)
         {
-            var category = await categoryRepository.GetByName(name);
-            return category;
+            try
+            {
+                var category = await categoryRepository.GetByName(name);
+                if (category == null)
+                    logger.LogInformation("Category with name {Name} not found in UseCase", name);
+
+                return category;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error in UseCase while getting category with name {Name}", name);
+                throw;
+            }
         }
 
         public async Task<bool> DeleteCategory(int id)
         {
             var deleteCategory = await categoryRepository.DeleteCategory(id);
+            if (!deleteCategory)
+            {
+                logger.LogInformation($"There is No Category With This Id {id}");
+                return false;
+            }
             return deleteCategory;
         }
 
         public async Task<CategoryListDto> AddCategory(CategoryAddDto categoryAddDto)
         {
             var addCategory = await categoryRepository.AddCategory(categoryAddDto);
+            if (addCategory is null)
+            {
+                logger.LogInformation($"Cant Add Category");
+                return null;
+            }
             return addCategory;
         }
         public async Task<CategoryListDto> UpdateCategory(int id, CategoryAddDto categoryAddDto)
         {
             var updatedCategory = await categoryRepository.UpdateCategory(id, categoryAddDto);
+            if (updatedCategory is null)
+            {
+                logger.LogInformation($"Cant updatedCategory");
+                return null;
+            }
             return updatedCategory;
         }
     }
