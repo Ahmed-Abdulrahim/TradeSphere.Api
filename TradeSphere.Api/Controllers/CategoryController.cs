@@ -66,7 +66,7 @@
             {
                 var addCategory = await categoryUseCase.AddCategory(categoryAddDto);
                 if (addCategory == null)
-                    return BadRequest(new ApiResponse(400, $"Cant Add Category With name {categoryAddDto.Name}"));
+                    return BadRequest(new ApiResponse(_StatusCode: 400, $"Cant Add Category With name {categoryAddDto.Name}"));
                 return Ok(addCategory);
             }
             catch (Exception ex)

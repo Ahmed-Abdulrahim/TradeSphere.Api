@@ -16,6 +16,7 @@ global using TradeSphere.Application.DTOs.Category;
 global using AutoMapper;
 global using TradeSphere.Application.DTOs;
 global using Microsoft.Extensions.Logging;
+global using TradeSphere.Application.DTOs.ProductAddDto;
 
 
 
