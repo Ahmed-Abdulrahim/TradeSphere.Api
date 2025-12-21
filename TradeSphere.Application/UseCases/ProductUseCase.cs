@@ -1,21 +1,31 @@
 ﻿namespace TradeSphere.Application.UseCases
 {
-    public class ProductUseCase(IProductRepository productRepository, ILogger<ProductUseCase> logger)
+    public class ProductUseCase(IProductRepository productRepository, IMapper mapper)
     {
-        public async Task<ProductInfoDto> AddProduct(ProductAddDto productAdd)
+        public async Task<ProductInfoDto?> AddProduct(ProductAddDto productAdd)
         {
-            var addProduct = await productRepository.AddProduct(productAdd);
-            if (addProduct is null)
-            {
-                logger.LogError("Add Product Is Nullable in Produt useCase");
-                return null;
-            }
-            return addProduct;
+
+            var product = mapper.Map<Product>(productAdd);
+            var addProduct = await productRepository.AddProduct(product);
+            var productInfo = await productRepository.GetById(product.Id);
+            if (productInfo is null) return null;
+            var result = mapper.Map<ProductInfoDto>(productInfo);
+            return result;
+
+        }
+        public async Task<bool> DeleteProduct(int id) => await productRepository.DeleteProduct(id);
+        public async Task<List<ProductInfoDto>?> GetAllProduct()
+        {
+            var products = await productRepository.GetAllProducts();
+            var mapProducts = mapper.Map<List<ProductInfoDto>>(products);
+            return mapProducts;
+        }
+        public async Task<ProductInfoDto?> GetProductById(int id)
+        {
+            var product = await productRepository.GetById(id);
+            return product is null ? null : mapper.Map<ProductInfoDto>(product);
         }
 
-        public Task<bool> DeleteProduct(int id) => productRepository.DeleteProduct(id);
-
-        public async Task<List<ProductInfoDto>> GetAllProduct() => await productRepository.GetAllProducts();
 
     }
 }

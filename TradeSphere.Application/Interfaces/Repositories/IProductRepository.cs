@@ -2,11 +2,11 @@
 {
     public interface IProductRepository
     {
-        Task<List<ProductInfoDto>> GetAllProducts();
-        Task<ProductInfoDto> GetById(int id);
-        Task<ProductInfoDto> GetByName(string name);
-        Task<ProductInfoDto> AddProduct(ProductAddDto categoryAddDto);
-        Task<ProductInfoDto> UpdateProduct(int id, ProductAddDto categoryAddDto);
+        Task<IEnumerable<Product>> GetAllProducts();
+        Task<Product> GetById(int id);
+        Task<Product> GetByName(string name);
+        Task<Product> AddProduct(Product addPrdouct);
+        Task<Product> UpdateProduct(int id, Product updateProduct);
         Task<bool> DeleteProduct(int id);
     }
 }
