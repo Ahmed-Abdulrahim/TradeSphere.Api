@@ -6,7 +6,7 @@
         Task<Product> GetById(int id);
         Task<Product> GetByName(string name);
         Task<Product> AddProduct(Product addPrdouct);
-        Task<Product> UpdateProduct(int id, Product updateProduct);
+        Task<Product> UpdateProduct(Product updateProduct);
         Task<bool> DeleteProduct(int id);
     }
 }

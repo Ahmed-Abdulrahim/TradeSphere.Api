@@ -22,13 +22,23 @@
             return Ok(product);
         }
 
+        [HttpGet("GetByName{name}")]
+        public async Task<ActionResult<ProductInfoDto>> GetByName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return BadRequest(new ApiResponse(400, "Invalid Name"));
+            var product = await productUseCase.GetProductByName(name);
+            if (product is null) return NotFound(new ApiResponse(404));
+            return Ok(product);
+
+        }
+
         [HttpPost]
         public async Task<ActionResult<ProductInfoDto>> AddProduct(ProductAddDto productAdd)
         {
             if (productAdd is null)
             {
                 logger.LogWarning("Model Of ProductAdd Dto Is null ");
-                return BadRequest(new ApiResponse(400, "Invalid Data"));
+                return BadRequest(new ApiResponse(400, _Message: "Invalid Data"));
             }
 
             var addProduct = await productUseCase.AddProduct(productAdd);
@@ -40,8 +50,16 @@
             return Ok(addProduct);
         }
 
-
-
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ProductInfoDto>> UpdateProduct(int id, ProductAddDto updateProduct)
+        {
+            if (id <= 0 || updateProduct is null)
+                return BadRequest(new ApiResponse(400, _Message: "Invalid Data"));
+            var product = await productUseCase.UpdateProduct(id, updateProduct);
+            if (product is null)
+                return NotFound(new ApiResponse(404, _Message: "Product not found or cant update"));
+            return Ok(product);
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)

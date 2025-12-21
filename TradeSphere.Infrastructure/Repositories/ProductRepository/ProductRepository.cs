@@ -31,14 +31,17 @@
             return product;
         }
 
-        public Task<Product> GetByName(string name)
+        public async Task<Product> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var product = await unit.Repository<Product>().GetByIdSpec(new ProductSpecification(p => p.Name == name));
+            return product;
         }
 
-        public Task<Product> UpdateProduct(int id, Product updateProduct)
+        public async Task<Product?> UpdateProduct(Product updateProduct)
         {
-            throw new NotImplementedException();
+            unit.Repository<Product>().Update(updateProduct);
+
+            return await unit.CommitAsync() > 0 ? updateProduct : null;
         }
     }
 }
