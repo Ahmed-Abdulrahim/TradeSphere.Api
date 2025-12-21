@@ -6,6 +6,7 @@
         Task AddRangeAsync(IEnumerable<T> entities);
         Task<T> GetByIdSpec(ISpecefication<T> spec);
         Task<IEnumerable<T>> GetAllWithSpec(ISpecefication<T> spec);
+
         void Update(T entity);
         void Delete(T entity);
         void DeleteRange(IEnumerable<T> entities);

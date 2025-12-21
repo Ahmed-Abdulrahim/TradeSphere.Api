@@ -26,6 +26,12 @@
                 .Aggregate(query, (currentQuery, IncludeExpression)
                 => currentQuery.Include(IncludeExpression));
 
+            // Add string-based includes (for nested)
+            query = spec.IncludeStrings
+                .Aggregate(query, (currentQuery, includeString)
+                => currentQuery.Include(includeString));
+
+
             return query;
         }
     }

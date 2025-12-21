@@ -1,5 +1,6 @@
 ﻿using TradeSphere.Application.Mapping.CategoryProfile;
 using TradeSphere.Infrastructure.Repositories.CategoryRepository;
+using TradeSphere.Infrastructure.Repositories.OrderRepository;
 using TradeSphere.Infrastructure.Repositories.ProductRepository;
 
 namespace TradeSphere.Api.Extensions
@@ -25,11 +26,13 @@ namespace TradeSphere.Api.Extensions
             service.AddScoped<AuthUseCase>();
             service.AddScoped<ProductUseCase>();
             service.AddScoped<CategoryUseCase>();
+            service.AddScoped<OrderUseCase>();
             service.AddScoped<IEmailService, EmailService>();
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             service.AddScoped<ICategoryRepository, CategoryRepository>();
             service.AddScoped<IProductRepository, ProductRepository>();
+            service.AddScoped<IOrderRepository, OrderRepository>();
             service.AddAutoMapper(cfg => { }, typeof(CategoryProfile).Assembly);
 
 

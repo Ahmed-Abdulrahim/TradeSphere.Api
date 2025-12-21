@@ -1,5 +1,4 @@
-﻿
-namespace TradeSphere.Domain.Models
+﻿namespace TradeSphere.Domain.Models
 {
     public class OrderItem : BaseEntity
     {

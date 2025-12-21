@@ -14,6 +14,8 @@
         public List<Expression<Func<T, object>>> Includes { get; set; } = new List<Expression<Func<T, object>>>();
         public Expression<Func<T, object>> OrderBy { get; set; }
         public Expression<Func<T, object>> OrderByDesc { get; set; }
+        public List<string> IncludeStrings { get; set; } = new List<string>();
+
         public int Take { get; set; }
         public int Skip { get; set; }
         public bool HasPagination { get; set; }
@@ -24,6 +26,9 @@
         protected void AddOrderByDesc(Expression<Func<T, object>> expression)
             => OrderByDesc = expression;
 
+
+        protected void AddInclude(string includeString)
+            => IncludeStrings.Add(includeString);
         protected void AddPagination(int skip, int take)
         {
             HasPagination = true;

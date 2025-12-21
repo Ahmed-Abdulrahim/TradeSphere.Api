@@ -1,6 +1,6 @@
 ﻿namespace TradeSphere.Infrastructure.Specefication
 {
-    internal class ProductSpecification : BaseSpecefication<Product>
+    public class ProductSpecification : BaseSpecefication<Product>
     {
         public ProductSpecification()
         {

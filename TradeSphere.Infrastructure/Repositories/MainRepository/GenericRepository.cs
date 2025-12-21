@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Infrastructure.Repositories.MainRepository
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace TradeSphere.Infrastructure.Repositories.MainRepository
 {
     public class GenericRepository<T>(TradeSphereDbContext context) : IRepository<T> where T : BaseEntity
     {
@@ -11,7 +13,17 @@
 
         public void Delete(T entity) => Set.Remove(entity);
 
+        //public async Task<List<Order>> GetAllOrdersWithProducts()
+        //{
+        //    var orders = await context.Orders
+        //        .Include(o => o.AppUser)
+        //        .Include(o => o.Payment)
+        //        .Include(o => o.OrderItems)
+        //            .ThenInclude(oi => oi.Product)
+        //        .ToListAsync();
 
+        //    return orders;
+        //}
         public void DeleteRange(IEnumerable<T> entities) => Set.RemoveRange(entities);
 
 
