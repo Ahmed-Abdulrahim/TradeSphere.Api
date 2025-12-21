@@ -1,4 +1,5 @@
 ﻿using TradeSphere.Application.DTOs.OrderDto;
+using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
 using TradeSphere.Application.DTOs.OrderItemDto;
 using TradeSphere.Application.DTOs.PaymentDto;
 namespace TradeSphere.Application.Mapping.OrderMapping
@@ -19,6 +20,19 @@ namespace TradeSphere.Application.Mapping.OrderMapping
             CreateMap<OrderItem, OrderItemInfoDto>()
                 .ForMember(des => des.ProductName, o => o.MapFrom(src => src.Product.Name))
                 .IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+
+            CreateMap<CreateOrderDto, Order>()
+                .ForMember(dest => dest.OrderDate, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => OrderStatus.Pending))
+                .ForMember(dest => dest.TotalAmount, opt => opt.Ignore());
+
+            CreateMap<CreateOrderItemDto, OrderItem>();
+
+            CreateMap<CreatePaymentDto, Payment>()
+                .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => DateTime.UtcNow))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => PaymentStatus.Pending))
+                .ForMember(dest => dest.Amount, opt => opt.Ignore());
         }
     }
 }
+
