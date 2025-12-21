@@ -1,8 +1,4 @@
-﻿using TradeSphere.Application.DTOs.OrderDto;
-using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
-using TradeSphere.Application.DTOs.OrderItemDto;
-using TradeSphere.Application.DTOs.PaymentDto;
-namespace TradeSphere.Application.Mapping.OrderMapping
+﻿namespace TradeSphere.Application.Mapping.OrderMapping
 {
     public class OrderProfile : Profile
     {

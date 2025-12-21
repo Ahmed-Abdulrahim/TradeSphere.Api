@@ -1,8 +1,4 @@
-﻿using TradeSphere.Application.DTOs.OrderDto;
-using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
-using TradeSphere.Application.DTOs.OrderItemDto;
-
-namespace TradeSphere.Api.Controllers
+﻿namespace TradeSphere.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -35,6 +35,8 @@ global using TradeSphere.Application.Interfaces.UnitOfWork;
 global using TradeSphere.Infrastructure.UnitOfWork;
 global using TradeSphere.Application.DTOs.Category;
 global using TradeSphere.Application.DTOs.ProductAddDto;
+global using TradeSphere.Application.DTOs.OrderDto;
+global using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
 
 
 
