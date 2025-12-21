@@ -5,7 +5,7 @@
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.Property(o => o.OrderDate).HasColumnType("datetime");
-            builder.Property(o => o.TotalAmount).HasColumnType("decimal(18.2)").IsRequired();
+            builder.Property(o => o.TotalAmount).HasColumnType("decimal(18,2)").IsRequired();
             builder.Property(o => o.Status).HasConversion<string>()
                 .HasDefaultValue(OrderStatus.Pending).IsRequired();
             builder.HasOne(o => o.AppUser).WithMany(a => a.Orders).HasForeignKey(o => o.AppUserId)

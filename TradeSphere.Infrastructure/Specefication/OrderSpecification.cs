@@ -19,6 +19,7 @@
         {
             Includes.Add(o => o.AppUser);
             Includes.Add(p => p.Payment);
+            AddInclude("Payment.AppUser");
             Includes.Add(p => p.OrderItems);
             AddInclude("OrderItems.Product");
 

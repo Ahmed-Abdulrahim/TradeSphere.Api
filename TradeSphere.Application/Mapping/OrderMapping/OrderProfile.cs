@@ -6,12 +6,13 @@
         {
             CreateMap<Order, OrderInfoDto>()
                 .ForMember(des => des.userName, m => m.MapFrom(src => src.AppUser.FirstName + " " + src.AppUser.LastName))
+                .ForMember(des => des.PaymentInfo, m => m.MapFrom(src => src.Payment))
                 .IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
 
             CreateMap<Payment, PaymenInfoDto>()
-                .ForMember(des => des.UserName, m => m.MapFrom(src => src.AppUser.FirstName + " " + src.AppUser.LastName))
-                .ForMember(des => des.Status, o => o.MapFrom(src => src.Status.ToString()))
-                .IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
+            .ForMember(des => des.UserName, m => m.MapFrom(src => src.AppUser.FirstName + " " + src.AppUser.LastName))
+            .ForMember(des => des.Status, o => o.MapFrom(src => src.Status.ToString()))
+            .IgnoreAllPropertiesWithAnInaccessibleSetter().ReverseMap();
 
             CreateMap<OrderItem, OrderItemInfoDto>()
                 .ForMember(des => des.ProductName, o => o.MapFrom(src => src.Product.Name))
