@@ -10,16 +10,27 @@ namespace TradeSphere.Api.Controllers
         [Authorize]
         public async Task<ActionResult<ShoppingCartDto>> GetShoppingCartByUserId()
         {
-            var userName = User.FindFirstValue(ClaimTypes.Name);
-            if (userName is null)
+            var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userClaim is null)
                 return BadRequest(new ApiResponse(400, "Invalid UserName"));
-            var shoppingCart = await shoppingCartUseCase.GetShoppingCartByUserIdAsync(userName);
+            var userId = int.Parse(userClaim);
+            var shoppingCart = await shoppingCartUseCase.GetShoppingCartByUserIdAsync(userId);
             if (shoppingCart is null)
                 return NotFound(new ApiResponse(404, "Shopping Cart not found"));
             return Ok(shoppingCart);
         }
 
-
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<ShoppingCartDto>> AddToCart([FromBody] AddToCartDto dto)
+        {
+            var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userClaim is null)
+                return BadRequest(new ApiResponse(400, "Invalid UserName"));
+            var userId = int.Parse(userClaim);
+            var updatedCart = await shoppingCartUseCase.AddToCartAsync(userId, dto);
+            return Ok(updatedCart);
+        }
 
     }
 }

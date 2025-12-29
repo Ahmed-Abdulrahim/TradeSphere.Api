@@ -26,9 +26,9 @@
             return shoppingCart;
         }
 
-        public Task<ShoppingCart> GetShoppingCartByUser(string userName)
+        public Task<ShoppingCart> GetShoppingCartByUser(int userId)
         {
-            var shoppingCart = unit.Repository<ShoppingCart>().GetByIdSpecTracked(new ShoppingCartSpecification(s => s.AppUser.UserName == userName));
+            var shoppingCart = unit.Repository<ShoppingCart>().GetByIdSpecTracked(new ShoppingCartSpecification(s => s.AppUserId == userId));
             return shoppingCart;
         }
 

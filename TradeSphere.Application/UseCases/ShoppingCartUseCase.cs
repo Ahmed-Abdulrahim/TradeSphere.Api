@@ -4,18 +4,55 @@ namespace TradeSphere.Application.UseCases
 {
     public class ShoppingCartUseCase(IMapper mapper, IShoppingCartRepository shoppingCartRepository)
     {
-        public async Task<ShoppingCartDto> GetShoppingCartByUserIdAsync(string userName)
+        public async Task<ShoppingCartDto> GetShoppingCartByUserIdAsync(int userId)
         {
-            var shoppingCart = await shoppingCartRepository.GetShoppingCartByUser(userName);
+            var shoppingCart = await shoppingCartRepository.GetShoppingCartByUser(userId);
             if (shoppingCart is null) return null;
             return mapper.Map<ShoppingCartDto>(shoppingCart);
         }
 
-        public async Task<ShoppingCartDto> CreateShoppingCartAsync(ShoppingCartDto shoppingCartDto)
+        public async Task<ShoppingCartDto> AddToCartAsync(int userId, AddToCartDto dto)
         {
-            var shoppingCart = mapper.Map<ShoppingCart>(shoppingCartDto);
-            var createdShoppingCart = await shoppingCartRepository.AddShoppingCart(shoppingCart);
-            return mapper.Map<ShoppingCartDto>(createdShoppingCart);
+           
+            var cart = await shoppingCartRepository.GetShoppingCartByUser(userId);
+
+            
+            if (cart == null)
+            {
+                cart = new ShoppingCart
+                {
+                    AppUserId = userId,
+                    CartItems = new List<CartItem>()
+                };
+
+                await shoppingCartRepository.AddShoppingCart(cart);
+            }
+
+          
+            var existingItem = cart.CartItems
+                .FirstOrDefault(c => c.ProductId == dto.ProductId);
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity += dto.Quantity;
+            }
+            else
+            {
+                cart.CartItems.Add(new CartItem
+                {
+                    ProductId = dto.ProductId,
+                    Quantity = dto.Quantity
+                });
+            }
+
+            await shoppingCartRepository.UpdateShoppingCart(cart);
+
+            return mapper.Map<ShoppingCartDto>(cart);
         }
+
+
+
+
+
     }
 }

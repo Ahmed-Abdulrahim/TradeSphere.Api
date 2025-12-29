@@ -20,6 +20,7 @@
         {
             Includes.Add(o => o.AppUser);
             Includes.Add(o => o.CartItems);
+            AddInclude("CartItems.Product");
 
         }
 

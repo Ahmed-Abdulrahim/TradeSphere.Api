@@ -2,7 +2,7 @@
 {
     public interface IShoppingCartRepository
     {
-        Task<ShoppingCart> GetShoppingCartByUser(string userName);
+        Task<ShoppingCart> GetShoppingCartByUser(int userId);
         Task<ShoppingCart> GetById(int id);
         Task<ShoppingCart> AddShoppingCart(ShoppingCart shoppingCart);
         Task<ShoppingCart> UpdateShoppingCart(ShoppingCart shoppingCart);
