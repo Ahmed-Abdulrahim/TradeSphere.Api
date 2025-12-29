@@ -68,5 +68,27 @@ namespace TradeSphere.Application.UseCases
             return mapper.Map<ShoppingCartDto>(cart);
 
         }
+
+        public async Task<ShoppingCartDto> ClearCartAsync(int userId)
+        {
+            var cart = await shoppingCartRepository.GetShoppingCartByUser(userId);
+            if (cart == null) return null;
+            cart.CartItems.Clear();
+            await shoppingCartRepository.UpdateShoppingCart(cart);
+            return mapper.Map<ShoppingCartDto>(cart);
+        }
+
+        public async Task<ShoppingCartDto> UpdateCart(int userId, int productId, int quantity)
+        {
+            var cartItem = await shoppingCartRepository.GetShoppingCartByUser(userId);
+            if (cartItem == null || cartItem.CartItems == null || !cartItem.CartItems.Any())
+                return null!;
+
+            var existingItem = cartItem.CartItems
+               .FirstOrDefault(c => c.ProductId == productId);
+            existingItem.Quantity = quantity;
+            await shoppingCartRepository.UpdateShoppingCart(cartItem);
+            return mapper.Map<ShoppingCartDto>(cartItem);
+        }
     }
 }

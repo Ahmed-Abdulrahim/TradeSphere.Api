@@ -45,6 +45,32 @@ namespace TradeSphere.Api.Controllers
                 return NotFound(new ApiResponse(404, "Shopping Cart not found"));
             return Ok(updatedCart);
         }
+        [HttpPost("clear")]
+        [Authorize]
+        public async Task<ActionResult<ShoppingCartDto>> ClearCart()
+        {
+            var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userClaim is null)
+                return BadRequest(new ApiResponse(400, "Invalid UserName"));
+            var userId = int.Parse(userClaim);
+            var clearedCart = await shoppingCartUseCase.ClearCartAsync(userId);
+            if (clearedCart is null)
+                return NotFound(new ApiResponse(404, "Shopping Cart not found"));
+            return Ok(clearedCart);
+        }
 
+        [HttpPut("{productId}")]
+        [Authorize]
+        public async Task<ActionResult<ShoppingCartDto>> UpdateCartItemQuantity(int productId, int quantity)
+        {
+            var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userClaim is null)
+                return BadRequest(new ApiResponse(400, "Invalid UserName"));
+            var userId = int.Parse(userClaim);
+            var updatedCart = await shoppingCartUseCase.UpdateCart(userId, productId, quantity);
+            if (updatedCart is null)
+                return NotFound(new ApiResponse(404, "Shopping Cart not found"));
+            return Ok(updatedCart);
+        }
     }
 }
