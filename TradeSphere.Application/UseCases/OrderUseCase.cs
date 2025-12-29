@@ -1,6 +1,8 @@
-﻿namespace TradeSphere.Application.UseCases
+﻿using TradeSphere.Application.DTOs.OrderDto;
+
+namespace TradeSphere.Application.UseCases
 {
-    public class OrderUseCase(IOrderRepository orderRepository, IMapper mapper)
+    public class OrderUseCase(IOrderRepository orderRepository, IProductRepository productRepository, IMapper mapper)
     {
         public async Task<List<OrderInfoDto>> GetAllOrder()
         {
@@ -25,35 +27,93 @@
             return result;
         }
 
-        public async Task<OrderInfoDto> AddOrder(CreateOrderDto createOrderDto)
+        public async Task<OrderInfoDto> Checkout(CreateOrderDto dto)
         {
-            if (createOrderDto == null || createOrderDto.OrderItems == null || !createOrderDto.OrderItems.Any())
+
+            if (dto == null || !dto.OrderItems.Any())
+                throw new ArgumentException("Invalid order");
+
+            var order = new Order
             {
-                throw new ArgumentException("Order must contain at least one item");
+                AppUserId = dto.AppUserId,
+                OrderDate = DateTime.UtcNow,
+                Status = OrderStatus.Pending,
+                OrderItems = new List<OrderItem>()
+            };
+
+            decimal total = 0;
+
+            foreach (var item in dto.OrderItems)
+            {
+                var product = await productRepository.GetById(item.ProductId);
+
+                if (product == null)
+                    throw new Exception("Product not found");
+
+                if (product.Quantity < item.Quantity)
+                    throw new Exception("Insufficient stock");
+
+                product.Quantity -= item.Quantity;
+                await productRepository.UpdateProduct(product);
+                var orderItem = new OrderItem
+                {
+                    ProductId = product.Id,
+                    Quantity = item.Quantity,
+                    UnitPrice = product.Price
+                };
+
+                total += orderItem.Quantity * orderItem.UnitPrice;
+                order.OrderItems.Add(orderItem);
             }
 
-            var order = mapper.Map<Order>(createOrderDto);
+            order.TotalAmount = total;
 
-            order.OrderItems = mapper.Map<List<OrderItem>>(createOrderDto.OrderItems);
+            order.Payment = new Payment
+            {
+                Amount = total,
+                Status = PaymentStatus.Pending,
+                AppUserId = dto.AppUserId,
+                PaymentDate = DateTime.UtcNow,
 
-            decimal totalAmount = 0;
+
+            };
+
+            await orderRepository.AddOrder(order);
+
+            var savedOrder = await orderRepository.GetById(order.Id);
+            return mapper.Map<OrderInfoDto>(savedOrder);
+        }
+
+        public async Task<OrderInfoDto> CancelOrder(int orderId)
+        {
+            var order = await orderRepository.GetByIdTracked(orderId);
+            if (order == null)
+                throw new Exception("Order not found");
+            if (order.Status == OrderStatus.Cancelled || order.Status == OrderStatus.Shipped || order.Status == OrderStatus.Delivered)
+                throw new Exception("Order is already cancelled");
+            order.Status = OrderStatus.Cancelled;
             foreach (var item in order.OrderItems)
             {
-                totalAmount += item.Quantity * item.UnitPrice;
+                var product = await productRepository.GetByIdTracked(item.ProductId);
+                if (product != null)
+                {
+                    product.Quantity += item.Quantity;
+                }
             }
-            order.TotalAmount = totalAmount;
+            await orderRepository.UpdateOrder(order);
+            return mapper.Map<OrderInfoDto>(order);
+        }
 
-            if (createOrderDto.Payment != null)
-            {
-                order.Payment = mapper.Map<Payment>(createOrderDto.Payment);
-                order.Payment.Amount = totalAmount;
-                order.Payment.AppUserId = createOrderDto.AppUserId;
-            }
 
-            var savedOrder = await orderRepository.AddOrder(order);
-
-            var result = await orderRepository.GetById(savedOrder.Id);
-            return mapper.Map<OrderInfoDto>(result);
+        public async Task<OrderInfoDto> UpdateOrderStatus(UpdateOrderStatusDto orderstatus)
+        {
+            var order = await orderRepository.GetByIdTracked(orderstatus.OrderId);
+            if (order == null)
+                throw new Exception("Order not found");
+            var stausExists = Enum.TryParse<OrderStatus>(orderstatus.Status, out var status);
+            order.Status = status;
+            await orderRepository.UpdateOrder(order);
+            return mapper.Map<OrderInfoDto>(order);
         }
     }
 }

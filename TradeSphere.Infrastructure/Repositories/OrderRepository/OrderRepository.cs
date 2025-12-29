@@ -30,9 +30,18 @@
             return order;
         }
 
-        public Task<Order> UpdateOrder(Order order)
+        public async Task<Order> UpdateOrder(Order order)
         {
-            throw new NotImplementedException();
+            unit.Repository<Order>().Update(order);
+            return await unit.CommitAsync() > 0 ? order : null!;
+        }
+
+        ///////////  
+        public async Task<Order> GetByIdTracked(int id)
+        {
+            var order = await unit.Repository<Order>().GetByIdSpecTracked(new OrderSpecification(id));
+            return order;
         }
     }
+
 }

@@ -30,8 +30,8 @@
         }
 
 
-        [HttpPost]
-        public async Task<ActionResult<OrderInfoDto>> AddOrder([FromBody] CreateOrderDto createOrderDto)
+        [HttpPost("Checkout")]
+        public async Task<ActionResult<OrderInfoDto>> Checkout([FromBody] CreateOrderDto createOrderDto)
         {
 
             if (!ModelState.IsValid)
@@ -43,7 +43,7 @@
             if (createOrderDto.OrderItems == null || !createOrderDto.OrderItems.Any())
                 return BadRequest(new ApiResponse(400, "Order must contain at least one item"));
 
-            var order = await orderUseCase.AddOrder(createOrderDto);
+            var order = await orderUseCase.Checkout(createOrderDto);
 
             if (order == null)
                 return BadRequest(new ApiResponse(400, "Failed to create order"));
@@ -51,6 +51,28 @@
             return CreatedAtAction(nameof(GetById), new { id = order.Id }, order);
 
 
+        }
+
+
+        [HttpPost("cancel/{id}")]
+        public async Task<ActionResult> CancelOrder(int id)
+        {
+            if (id <= 0) return BadRequest(new ApiResponse(400, "Invalid Id"));
+            var result = await orderUseCase.CancelOrder(id);
+            if (result is null)
+                return BadRequest(new ApiResponse(400, "Failed to cancel order"));
+            return NoContent();
+        }
+
+        [HttpPut("status")]
+        public async Task<ActionResult> UpdateOrderStatus([FromBody] UpdateOrderStatusDto updateOrderStatusDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(new ApiResponse(400, "Invalid data"));
+            var result = await orderUseCase.UpdateOrderStatus(updateOrderStatusDto);
+            if (result is null)
+                return BadRequest(new ApiResponse(400, "Failed to update order status"));
+            return NoContent();
         }
     }
 }

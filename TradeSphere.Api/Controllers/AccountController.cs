@@ -10,7 +10,7 @@ namespace TradeSphere.Api.Controllers
         public async Task<ActionResult<UserResultDto>> Login([FromBody] UserLoginDto user)
         {
             var result = await authUseCase.LoginUser(user);
-            if (result is null) return BadRequest(new ApiResponse(400, "Invalid Email Or Password"));
+            if (result is null) return BadRequest(new ApiResponse(400, _Message: "Invalid Email Or Password"));
             return Ok(result);
         }
         [HttpPost("register")]

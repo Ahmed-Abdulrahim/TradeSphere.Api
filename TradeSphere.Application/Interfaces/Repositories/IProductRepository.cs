@@ -8,5 +8,6 @@
         Task<Product> AddProduct(Product addPrdouct);
         Task<Product> UpdateProduct(Product updateProduct);
         Task<bool> DeleteProduct(int id);
+        public Task<Product> GetByIdTracked(int id);
     }
 }

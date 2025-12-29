@@ -43,5 +43,11 @@
 
             return await unit.CommitAsync() > 0 ? updateProduct : null;
         }
+        ///////////  
+        public async Task<Product> GetByIdTracked(int id)
+        {
+            var product = await unit.Repository<Product>().GetByIdSpecTracked(new ProductSpecification(id));
+            return product;
+        }
     }
 }

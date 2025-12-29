@@ -27,6 +27,11 @@
 
         public async Task<T> GetByIdSpec(ISpecefication<T> spec) => await GenerateQuery(spec).AsNoTracking().FirstOrDefaultAsync();
 
+        public async Task<T> GetByIdSpecTracked(ISpecefication<T> spec) => await GenerateQuery(spec).FirstOrDefaultAsync();
+
+
+        public async Task<T> GetByIdTrackedAsync(int id) => await Set.FirstOrDefaultAsync(e => e.Id == id);
+
         public Task<T> GetFirstOrDefault(Expression<Func<T, bool>> predicate) => Set.AsNoTracking().FirstOrDefaultAsync(predicate);
 
         public void Update(T entity) => Set.Update(entity);

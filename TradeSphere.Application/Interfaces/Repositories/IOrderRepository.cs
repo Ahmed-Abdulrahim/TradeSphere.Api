@@ -8,6 +8,7 @@
         Task<Order> AddOrder(Order order);
         Task<Order> UpdateOrder(Order order);
         Task<Order> DeleteOrder(Order order);
+        public Task<Order> GetByIdTracked(int id);
 
     }
 }
