@@ -32,5 +32,19 @@ namespace TradeSphere.Api.Controllers
             return Ok(updatedCart);
         }
 
+        [HttpDelete]
+        [Authorize]
+        public async Task<ActionResult<ShoppingCartDto>> RemoveFromCart([FromQuery] int productId, [FromQuery] int quantity)
+        {
+            var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userClaim is null)
+                return BadRequest(new ApiResponse(400, "Invalid UserName"));
+            var userId = int.Parse(userClaim);
+            var updatedCart = await shoppingCartUseCase.RemoveFromCartAsync(userId, productId, quantity);
+            if (updatedCart is null)
+                return NotFound(new ApiResponse(404, "Shopping Cart not found"));
+            return Ok(updatedCart);
+        }
+
     }
 }
