@@ -8,7 +8,6 @@
 
         public async Task AddRangeAsync(IEnumerable<T> entities) => await Set.AddRangeAsync(entities);
 
-
         public void Delete(T entity) => Set.Remove(entity);
 
         public void DeleteRange(IEnumerable<T> entities) => Set.RemoveRange(entities);

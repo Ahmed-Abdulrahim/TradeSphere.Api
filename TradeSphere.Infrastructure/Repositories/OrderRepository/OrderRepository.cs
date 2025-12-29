@@ -19,9 +19,10 @@
             return order;
         }
 
-        public Task<Order> DeleteOrder(Order order)
+        public async Task<Order> DeleteOrder(Order order)
         {
-            throw new NotImplementedException();
+            unit.Repository<Order>().Delete(order);
+            return await unit.CommitAsync() > 0 ? order : null!;
         }
 
         public async Task<IEnumerable<Order>> GetByUserId(int userId)

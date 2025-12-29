@@ -115,6 +115,24 @@ namespace TradeSphere.Application.UseCases
             await orderRepository.UpdateOrder(order);
             return mapper.Map<OrderInfoDto>(order);
         }
+
+
+        public async Task<string> GetStatus(int orderId)
+        {
+            var order = await orderRepository.GetById(orderId);
+            if (order == null)
+                throw new Exception("Order not found");
+            return order.Status.ToString();
+        }
+
+        public async Task<Order> DeleteOrder(int orderId)
+        {
+            var order = await orderRepository.GetByIdTracked(orderId);
+            if (order == null)
+                throw new Exception("Order not found");
+            var orderDeleted = await orderRepository.DeleteOrder(order);
+            return orderDeleted;
+        }
     }
 }
 
