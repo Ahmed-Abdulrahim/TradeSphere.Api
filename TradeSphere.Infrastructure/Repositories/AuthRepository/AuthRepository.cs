@@ -24,8 +24,8 @@
             var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
             var encodedToken = WebUtility.UrlEncode(token);
             var confirmUrl =
-             $"{configuration["EmailSettings:AppUrl"]}/api/Account/confirmEmail" +
-             $"?userId={user.Id}&token={encodedToken}";
+              $"{configuration["EmailSettings:AppUrl"]}/api/Account/confirmEmail" +
+              $"?userId={user.Id}&token={encodedToken}";
             await emailService.SendEmailAsync(user.Email, "Confirm your email", EmailBody(confirmUrl));
             return user;
         }

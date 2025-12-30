@@ -16,6 +16,8 @@
             }
             var addUser = new AppUser()
             {
+                FirstName = registerUser.FirstName,
+                LastName = registerUser.LastName,
                 UserName = registerUser.UserName,
                 Email = registerUser.Email,
                 PhoneNumber = registerUser.PhoneNumber,
