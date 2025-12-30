@@ -43,6 +43,11 @@ namespace TradeSphere.Application.UseCases
             return await roleRepository.AddRole(roleName);
         }
 
+        public async Task<bool> ChangeUserRole(int userId, string roleName)
+        {
+            return await roleRepository.ChangeUserRole(userId, roleName);
+        }
+
 
     }
 }

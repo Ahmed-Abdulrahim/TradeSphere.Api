@@ -28,6 +28,18 @@ namespace TradeSphere.Infrastructure.Repositories.RoleRepository
             return "Role Created Successfully";
         }
 
+        public async Task<bool> ChangeUserRole(int userId, string roleName)
+        {
+            var findUser = await userManager.FindByIdAsync(userId.ToString());
+            if (findUser is null) throw new Exception("User not found");
+            var roles = await userManager.GetRolesAsync(findUser);
+            var removeRole = await userManager.RemoveFromRolesAsync(findUser, roles);
+            if (!removeRole.Succeeded) throw new Exception("Failed to remove existing roles");
+            var addRole = await userManager.AddToRoleAsync(findUser, roleName);
+            if (!addRole.Succeeded) throw new Exception("Failed to add new role");
+            return true;
+        }
+
         public async Task<List<AppRole>> GetAllRoles() => await roleManager.Roles.ToListAsync();
 
         public Task<AppRole> GetRoleById(int roleId) => roleManager.FindByIdAsync(roleId.ToString())!;

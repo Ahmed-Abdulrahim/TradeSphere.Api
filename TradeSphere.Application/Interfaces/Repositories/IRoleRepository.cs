@@ -9,5 +9,6 @@ namespace TradeSphere.Application.Interfaces.Repositories
         public Task<AppRole> GetUserRole(int UserId);
         public Task<bool> UpdateRole(int roleId, string name);
         public Task<string> AddRole(string roleName);
+        public Task<bool> ChangeUserRole(int userId, string roleName);
     }
 }

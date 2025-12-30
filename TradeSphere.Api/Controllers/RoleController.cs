@@ -4,9 +4,11 @@ namespace TradeSphere.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize("Admin")]
     public class RoleController(RoleUseCase roleUseCase) : ControllerBase
     {
         [HttpGet]
+
         public async Task<ActionResult<RoleDto>> GetAllRoles()
         {
             var roles = await roleUseCase.GetAllRoles();
@@ -46,6 +48,13 @@ namespace TradeSphere.Api.Controllers
             if (result == "Role name cannot be empty")
                 return BadRequest(new ApiResponse(400, result));
             return Ok(new ApiResponse(200, result));
+        }
+        [HttpPost("ChangeUserRole")]
+        public async Task<ActionResult> ChangeUserRole(int userId, string roleName)
+        {
+            var result = await roleUseCase.ChangeUserRole(userId, roleName);
+            if (!result) return NotFound($"Failed to change role for User ID {userId}.");
+            return NoContent();
         }
 
     }
