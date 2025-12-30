@@ -6,7 +6,7 @@
         {
             var message = new MimeMessage();
             message.From.Add(MailboxAddress.Parse(
-                _configuration["EmailSettings:From"]
+               Environment.GetEnvironmentVariable("From") ?? _configuration["EmailSettings:From"]
             ));
             message.To.Add(MailboxAddress.Parse(to));
             message.Subject = subject;
@@ -25,8 +25,8 @@
             );
 
             await smtp.AuthenticateAsync(
-                _configuration["EmailSettings:Username"],
-                _configuration["EmailSettings:Password"]
+               Environment.GetEnvironmentVariable("Username") ?? _configuration["EmailSettings:Username"],
+               Environment.GetEnvironmentVariable("Password") ?? _configuration["EmailSettings:Password"]
             );
 
             await smtp.SendAsync(message);

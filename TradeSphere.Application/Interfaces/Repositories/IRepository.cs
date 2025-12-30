@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TradeSphere.Application.Interfaces.Repositories
+﻿namespace TradeSphere.Application.Interfaces.Repositories
 {
     public interface IRepository<T> where T : BaseEntity
     {

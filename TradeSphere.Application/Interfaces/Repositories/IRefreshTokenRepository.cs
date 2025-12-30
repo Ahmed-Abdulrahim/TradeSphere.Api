@@ -1,6 +1,4 @@
-﻿using TradeSphere.Domain.Models.IdentityUser;
-
-namespace TradeSphere.Application.Interfaces.Repositories
+﻿namespace TradeSphere.Application.Interfaces.Repositories
 {
     public interface IRefreshTokenRepository
     {

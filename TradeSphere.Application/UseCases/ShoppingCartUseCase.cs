@@ -1,6 +1,4 @@
-﻿using TradeSphere.Application.DTOs.ShoppingCartDto;
-
-namespace TradeSphere.Application.UseCases
+﻿namespace TradeSphere.Application.UseCases
 {
     public class ShoppingCartUseCase(IMapper mapper, IShoppingCartRepository shoppingCartRepository)
     {

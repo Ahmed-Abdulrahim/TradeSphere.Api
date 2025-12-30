@@ -1,6 +1,4 @@
-﻿using TradeSphere.Application.DTOs.ShoppingCartDto;
-
-namespace TradeSphere.Api.Controllers
+﻿namespace TradeSphere.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -21,6 +21,9 @@ global using TradeSphere.Application.DTOs.OrderDto;
 global using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
 global using TradeSphere.Application.DTOs.OrderItemDto;
 global using TradeSphere.Application.DTOs.PaymentDto;
+global using TradeSphere.Application.DTOs.RolesDto;
+global using TradeSphere.Application.DTOs.ShoppingCartDto;
+
 
 
 

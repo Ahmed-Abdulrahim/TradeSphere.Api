@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace TradeSphere.Application.Interfaces.Repositories
+﻿namespace TradeSphere.Application.Interfaces.Repositories
 {
     public interface IAuthRepository
     {

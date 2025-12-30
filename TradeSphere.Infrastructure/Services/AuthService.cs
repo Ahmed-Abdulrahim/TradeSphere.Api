@@ -17,8 +17,8 @@
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
-
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configration["JwtOptions:secretKey"]!));
+            var envSecret = Environment.GetEnvironmentVariable("secretKey");
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(envSecret ?? configration["JwtOptions:secretKey"]!));
             var token = new JwtSecurityToken(
                 issuer: configration["JwtOptions:issuer"],
                 audience: configration["JwtOptions:audience"],

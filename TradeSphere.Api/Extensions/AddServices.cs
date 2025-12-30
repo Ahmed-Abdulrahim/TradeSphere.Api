@@ -1,11 +1,4 @@
-﻿using TradeSphere.Application.Mapping.CategoryProfile;
-using TradeSphere.Infrastructure.Repositories.CategoryRepository;
-using TradeSphere.Infrastructure.Repositories.OrderRepository;
-using TradeSphere.Infrastructure.Repositories.ProductRepository;
-using TradeSphere.Infrastructure.Repositories.RoleRepository;
-using TradeSphere.Infrastructure.Repositories.ShoppingCartRepository;
-
-namespace TradeSphere.Api.Extensions
+﻿namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {

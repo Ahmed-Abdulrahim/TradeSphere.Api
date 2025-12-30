@@ -37,6 +37,14 @@ global using TradeSphere.Application.DTOs.Category;
 global using TradeSphere.Application.DTOs.ProductAddDto;
 global using TradeSphere.Application.DTOs.OrderDto;
 global using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
+global using TradeSphere.Application.DTOs.RolesDto;
+global using TradeSphere.Application.DTOs.ShoppingCartDto;
+global using TradeSphere.Application.Mapping.CategoryProfile;
+global using TradeSphere.Infrastructure.Repositories.CategoryRepository;
+global using TradeSphere.Infrastructure.Repositories.OrderRepository;
+global using TradeSphere.Infrastructure.Repositories.ProductRepository;
+global using TradeSphere.Infrastructure.Repositories.RoleRepository;
+global using TradeSphere.Infrastructure.Repositories.ShoppingCartRepository;
 
 
 

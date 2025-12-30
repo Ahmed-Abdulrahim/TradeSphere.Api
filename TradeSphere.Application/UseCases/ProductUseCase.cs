@@ -1,6 +1,4 @@
-﻿using TradeSphere.Application.Interfaces.UnitOfWork;
-
-namespace TradeSphere.Application.UseCases
+﻿namespace TradeSphere.Application.UseCases
 {
     public class ProductUseCase(IProductRepository productRepository, IMapper mapper)
     {

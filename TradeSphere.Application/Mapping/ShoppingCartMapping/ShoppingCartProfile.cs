@@ -1,6 +1,4 @@
-﻿using TradeSphere.Application.DTOs.ShoppingCartDto;
-
-namespace TradeSphere.Application.Mapping.ShoppingCartMapping
+﻿namespace TradeSphere.Application.Mapping.ShoppingCartMapping
 {
     public class ShoppingCartProfile : Profile
     {

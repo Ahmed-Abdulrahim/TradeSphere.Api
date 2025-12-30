@@ -1,6 +1,4 @@
-﻿using TradeSphere.Application.DTOs.OrderDto;
-
-namespace TradeSphere.Application.UseCases
+﻿namespace TradeSphere.Application.UseCases
 {
     public class OrderUseCase(IOrderRepository orderRepository, IProductRepository productRepository, IMapper mapper)
     {
