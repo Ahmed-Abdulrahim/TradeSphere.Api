@@ -199,6 +199,20 @@ namespace TradeSphere.Infrastructure.Repositories.AuthRepository
                 throw new ApplicationException("Failed to logout user");
         }
 
+        public async Task<AppUser> GetProfileDto(int userId)
+        {
+            var findUser = await userManager.FindByIdAsync(userId.ToString());
+            if (findUser is null) return null;
 
+            return findUser;
+
+        }
+
+        public async Task<AppUser> UpdateProfile(AppUser appUser)
+        {
+            if (appUser is null) throw new Exception("User Not Found");
+            var updateUser = await userManager.UpdateAsync(appUser);
+            return appUser;
+        }
     }
 }

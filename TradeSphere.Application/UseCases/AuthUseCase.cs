@@ -1,6 +1,6 @@
 ﻿namespace TradeSphere.Application.UseCases
 {
-    public class AuthUseCase(IAuthService authServices, IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository)
+    public class AuthUseCase(IMapper mapper, IAuthService authServices, IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository)
     {
         public async Task<UserResultDto> RegisterUser(UserRegisterDto registerUser)
         {
@@ -108,5 +108,22 @@
             return "Logout Sucess";
         }
 
+
+        public async Task<UserProfileDto> GetProfile(int UserId)
+        {
+            var user = await userRepository.GetProfileDto(UserId);
+            if (user is null) throw new Exception("User Not Found");
+            return mapper.Map<UserProfileDto>(user); ;
+        }
+
+        public async Task<UserProfileDto> UpdateProfile(int UserId, UpdateProfileDto updateProfile)
+        {
+            var user = await userRepository.GetProfileDto(UserId);
+            if (user is null) throw new Exception("User Not Found");
+            var updatedUser = mapper.Map(updateProfile, user);
+            var result = await userRepository.UpdateProfile(updatedUser);
+            return mapper.Map<UserProfileDto>(result);
+
+        }
     }
 }
