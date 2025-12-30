@@ -24,8 +24,10 @@ namespace TradeSphere.Api.Extensions
             }).AddEntityFrameworkStores<TradeSphereDbContext>().AddDefaultTokenProviders(); ;
 
             service.AddScoped<IAuthService, AuthService>();
-            service.AddScoped<IUserRepository, UserRepository>();
+            service.AddScoped<IAuthRepository, AuthRepository>();
+            service.AddScoped<IAccountRepository, AccountRepository>();
             service.AddScoped<AuthUseCase>();
+            service.AddScoped<AccountUseCase>();
             service.AddScoped<ProductUseCase>();
             service.AddScoped<CategoryUseCase>();
             service.AddScoped<OrderUseCase>();

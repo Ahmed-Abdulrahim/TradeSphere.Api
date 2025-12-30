@@ -3,7 +3,7 @@ using TradeSphere.Infrastructure.Repositories.AuthRepository;
 
 namespace TradeSphere.Infrastructure.UnitOfWork
 {
-    public class UnitOfWork(TradeSphereDbContext context, UserManager<AppUser> userManger, IUserRepository user) : IUnitOfWork
+    public class UnitOfWork(TradeSphereDbContext context, UserManager<AppUser> userManger, IAuthRepository user) : IUnitOfWork
     {
         private readonly Dictionary<string, object> repositories = new();
         private IRefreshTokenRepository? _refreshTokenRepository;
@@ -19,12 +19,12 @@ namespace TradeSphere.Infrastructure.UnitOfWork
 
             return (IRepository<T>)repositories[key];
         }
-        public IUserRepository Users
+        public IAuthRepository Users
         {
             get
             {
                 if (user == null)
-                    user = new UserRepository(userManger, null, null);
+                    user = new AuthRepository(userManger, null, null);
 
                 return user;
             }

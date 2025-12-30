@@ -26,6 +26,23 @@
             var result = await authUseCase.ConfirmEmail(userId, token);
             return Ok(new ApiResponse(200, result));
         }
+        [AllowAnonymous]
+        [HttpGet("confirmChangeEmail")]
+        public async Task<IActionResult> ConfirmChangeEmail([FromQuery] string userId, [FromQuery] string newEmail, [FromQuery] string token)
+        {
+            var result = await authUseCase.ConfrimEmailForAfterChanging(
+                userId,
+                new ConfirmChangeEmailRequest
+                {
+                    NewEmail = newEmail,
+                    Token = token
+                });
+
+            if (string.IsNullOrEmpty(result))
+                return BadRequest(new ApiResponse(400, "Invalid or expired token"));
+
+            return Ok(new ApiResponse(200, result));
+        }
 
         [HttpPost("forgotPassword")]
         [AllowAnonymous]
