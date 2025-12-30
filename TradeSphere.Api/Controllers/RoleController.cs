@@ -2,7 +2,7 @@
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize("Admin")]
+    // [Authorize("Admin")]
     public class RoleController(RoleUseCase roleUseCase) : ControllerBase
     {
         [HttpGet]

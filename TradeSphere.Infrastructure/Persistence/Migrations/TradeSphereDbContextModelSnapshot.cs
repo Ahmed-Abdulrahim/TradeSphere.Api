@@ -346,40 +346,6 @@ namespace TradeSphere.Infrastructure.Persistence.Migrations
                     b.ToTable("RefreshTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TradeSphere.Domain.Models.Notification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("Nvarchar");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("Nvarchar");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("Notifications", (string)null);
-                });
-
             modelBuilder.Entity("TradeSphere.Domain.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -401,7 +367,7 @@ namespace TradeSphere.Infrastructure.Persistence.Migrations
                         .HasDefaultValue("Pending");
 
                     b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18.2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -630,17 +596,6 @@ namespace TradeSphere.Infrastructure.Persistence.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("TradeSphere.Domain.Models.Notification", b =>
-                {
-                    b.HasOne("TradeSphere.Domain.Models.IdentityUser.AppUser", "AppUser")
-                        .WithMany("Notifications")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("TradeSphere.Domain.Models.Order", b =>
                 {
                     b.HasOne("TradeSphere.Domain.Models.IdentityUser.AppUser", "AppUser")
@@ -720,8 +675,6 @@ namespace TradeSphere.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("TradeSphere.Domain.Models.IdentityUser.AppUser", b =>
                 {
                     b.Navigation("FeedBacks");
-
-                    b.Navigation("Notifications");
 
                     b.Navigation("Orders");
 

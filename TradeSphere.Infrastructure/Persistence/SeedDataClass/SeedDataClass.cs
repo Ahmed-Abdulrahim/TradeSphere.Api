@@ -131,44 +131,35 @@
                     var orderItems = JsonSerializer.Deserialize<List<OrderItem>>(orderItemsData, option)!;
                     context.OrderItems.AddRange(orderItems);
                     await context.SaveChangesAsync();
-                }
 
-                //Add Notifications
-                if (!context.Notifications.Any())
-                {
-                    var otificationsData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "Notifications.json"));
-                    var notifications = JsonSerializer.Deserialize<List<Notification>>(otificationsData, option)!;
-                    context.Notifications.AddRange(notifications);
-                    await context.SaveChangesAsync();
-                }
+                    //Add FeedBacks
+                    if (!context.FeedBacks.Any())
+                    {
+                        var feedBacksData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "FeedBacks.json"));
+                        var feedBacks = JsonSerializer.Deserialize<List<FeedBack>>(feedBacksData, option)!;
+                        context.FeedBacks.AddRange(feedBacks);
+                        await context.SaveChangesAsync();
+                    }
 
-                //Add FeedBacks
-                if (!context.FeedBacks.Any())
-                {
-                    var feedBacksData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "FeedBacks.json"));
-                    var feedBacks = JsonSerializer.Deserialize<List<FeedBack>>(feedBacksData, option)!;
-                    context.FeedBacks.AddRange(feedBacks);
-                    await context.SaveChangesAsync();
-                }
+                    //Add RefreshTokens
+                    if (!context.RefreshTokens.Any())
+                    {
+                        var refreshTokensData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "RefreshTokens.json"));
+                        var refreshTokens = JsonSerializer.Deserialize<List<RefreshToken>>(refreshTokensData, option)!;
+                        context.RefreshTokens.AddRange(refreshTokens);
+                        await context.SaveChangesAsync();
+                    }
 
-                //Add RefreshTokens
-                if (!context.RefreshTokens.Any())
-                {
-                    var refreshTokensData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "RefreshTokens.json"));
-                    var refreshTokens = JsonSerializer.Deserialize<List<RefreshToken>>(refreshTokensData, option)!;
-                    context.RefreshTokens.AddRange(refreshTokens);
-                    await context.SaveChangesAsync();
+                    //Add Payments
+                    if (!context.Payments.Any())
+                    {
+                        var paymentsData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "Payments.json"));
+                        var payments = JsonSerializer.Deserialize<List<Payment>>(paymentsData, option)!;
+                        context.Payments.AddRange(payments);
+                        await context.SaveChangesAsync();
+                    }
+                    await transaction.CommitAsync();
                 }
-
-                //Add Payments
-                if (!context.Payments.Any())
-                {
-                    var paymentsData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "Payments.json"));
-                    var payments = JsonSerializer.Deserialize<List<Payment>>(paymentsData, option)!;
-                    context.Payments.AddRange(payments);
-                    await context.SaveChangesAsync();
-                }
-                await transaction.CommitAsync();
             }
             catch (Exception)
             {

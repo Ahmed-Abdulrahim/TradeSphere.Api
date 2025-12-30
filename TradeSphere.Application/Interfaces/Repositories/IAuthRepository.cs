@@ -2,6 +2,7 @@
 {
     public interface IAuthRepository
     {
+        public Task AddDefaultRole(AppUser appUser, string roleName);
         Task<AppUser> FindByEmailAsync(string email);
         Task<AppUser> FindByUserIdAsync(string userId);
         Task<bool> CheckPasswordAsync(AppUser user, string password);

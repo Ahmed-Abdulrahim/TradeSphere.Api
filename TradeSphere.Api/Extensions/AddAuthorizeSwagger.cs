@@ -19,7 +19,7 @@
                     ClockSkew = TimeSpan.Zero,
                     ValidIssuer = configuration["JwtOptions:issuer"],
                     ValidAudience = configuration["JwtOptions:audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:secretKey"]!))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("secretKey") ?? configuration["JwtOptions:secretKey"]!))
                 };
 
             });

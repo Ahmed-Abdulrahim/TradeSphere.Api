@@ -21,6 +21,7 @@
                 PhoneNumber = registerUser.PhoneNumber,
             };
             await authRepository.CreateAsync(addUser, registerUser.Password);
+            await authRepository.AddDefaultRole(addUser, "User");
             var result = new UserResultDto()
             {
                 Email = registerUser.Email,

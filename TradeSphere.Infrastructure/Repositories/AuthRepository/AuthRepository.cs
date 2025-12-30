@@ -35,6 +35,11 @@
             if (user == null) return null;
             return user;
         }
+        public async Task AddDefaultRole(AppUser appUser, string roleName)
+        {
+            var defaultRole = "User";
+            await userManager.AddToRoleAsync(appUser, defaultRole);
+        }
         public async Task ForgetPasswordAsync(string email)
         {
             var user = await userManager.FindByEmailAsync(email);
